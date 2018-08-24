@@ -3,8 +3,6 @@
 x = []
 y = []
 z = []
-board_right = 0
-board_left = 0
 
 arq = open('case.txt', 'r')
 texto = arq.readlines()
@@ -13,6 +11,8 @@ for linha in texto :
 
     if(pontos[0]=="Boundary"):
         print(pontos)
+        board_left = pontos[2]
+        board_right = pontos[3]
     else:
         if(pontos[0]=="RoutedVia"):
             print("R")

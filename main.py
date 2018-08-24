@@ -10,13 +10,16 @@ arq = open('case.txt', 'r')
 texto = arq.readlines()
 for linha in texto :
     pontos = linha.split(" ")
-    print(pontos[1])
-    
+
     if(pontos[0]=="Boundary"):
-        print("B")
+        print(pontos)
     else:
         if(pontos[0]=="RoutedVia"):
             print("R")
+            bondary = pontos[1]
+            print(bondary[1])
         else:
             print("RS")
+            bondary = pontos[1]
+            print(bondary[1])
 arq.close()

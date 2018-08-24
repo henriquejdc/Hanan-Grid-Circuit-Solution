@@ -22,4 +22,5 @@ for linha in texto :
             print("RS")
             bondary = pontos[1]
             print(bondary[1])
+            z.append(int(bondary[1]))
 arq.close()

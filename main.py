@@ -27,3 +27,7 @@ for linha in texto :
                 print(bondary[1])
                 z.append(int(bondary[1]))
 arq.close()
+
+x.sort()
+y.sort()
+z.sort()

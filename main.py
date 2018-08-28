@@ -1,6 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+#Camadas
 layer = []
+#Borda Left
+bondary_lx = 0
+bondary_ly = 0
+#Borda Right
+bondary_rx = 0
+bondary_ry = 0
 
 arq = open('case.txt', 'r')
 texto = arq.readlines()
@@ -13,6 +20,22 @@ for linha in texto :
             print(pontos)
             board_left = pontos[2]
             board_right = pontos[3]
+
+            pontos_usado = board_left.split(")")
+            pontos_usado1 = pontos_usado[0].split("(")
+            pontos_usado_left = pontos_usado1[1].split(",")
+            print(pontos_usado_left)
+            bondary_lx = int(pontos_usado_left[0])
+            bondary_ly = int(pontos_usado_left[1])
+
+
+            pontos_usado = board_right.split(")")
+            pontos_usado1 = pontos_usado[0].split("(")
+            pontos_usado_right = pontos_usado1[1].split(",")
+            print(pontos_usado_right)
+            bondary_rx = int(pontos_usado_right[0])
+            bondary_ry = int(pontos_usado_right[1])
+
         elif(pontos[0]=="MetalLayers"):
             layers = int(pontos[2])
             list = []
@@ -21,12 +44,12 @@ for linha in texto :
                 list.append(list1)
             for w in range(layers):
                 layer.append(list)
-            print(layer)
+            #print(layer)
         else:
             if(pontos[0]=="RoutedVia"):
                 #print("R")
                 bondary = pontos[1]
-                print(bondary)
+                #print(bondary)
             else:
                 #print("RS")
                 bondary = pontos[1]
@@ -56,8 +79,11 @@ for linha in texto :
 
 arq.close()
 
-x.sort()
-y.sort()
-z.sort()
 
-print(layer)
+for bond in layer:
+    for lay in bond:
+        lay.sort()
+
+for bond in layer:
+    print(bond)
+#print(layer)

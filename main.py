@@ -52,10 +52,14 @@ for linha in texto :
                     pontos_usados1 = pontos[3].split(",")
                     ponto_x = pontos_usados[0].split("(")
                     ponto_y = pontos_usados[1].split(")")
+                    layer[int(bondary[1])-1][0].append(int(ponto_x[1])+dist_obj)
+                    layer[int(bondary[1])-1][1].append(int(ponto_y[0])+dist_obj)
                     obst_x.append(int(ponto_x[1]))
                     obst_y.append(int(ponto_y[0]))
                     ponto_x = pontos_usados1[0].split("(")
                     ponto_y = pontos_usados1[1].split(")")
+                    layer[int(bondary[1])-1][0].append(int(ponto_x[1])+dist_obj)
+                    layer[int(bondary[1])-1][1].append(int(ponto_y[0])+dist_obj)
                     obst_x.append(int(ponto_x[1]))
                     obst_y.append(int(ponto_y[0]))
 
@@ -73,6 +77,13 @@ for linha in texto :
                     layer[int(bondary[1])-1][1].append(int(ponto_y[0]))
 arq.close()
 
+#Algoritmo de prim para navegar pelos vertices e suas arestas
+#Criar como surgir os vertices de encontros de linhas e colunas
+#Criar como navegar pelas arestas dos vertices que serao criados
+
+
+#Prints
+#####################################
 for bond in layer:
     for lay in bond:
         lay.sort()

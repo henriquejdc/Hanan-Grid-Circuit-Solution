@@ -99,11 +99,17 @@ arq.close()
 #Criar como surgir os vertices de encontros de linhas e colunas
 #Criar como navegar pelas arestas dos vertices que serao criados
 
-#Prints
+#ponto de componente inicial
+x_init = com_x[0]
+y_init = com_y[0]
+
+#Ordena vertices
 #####################################
 for bond in layer:
     for lay in bond:
         lay.sort()
+    pos_x_init = bond[0].index(x_init)
+    pos_y_init = bond[1].index(y_init)
 print bondary_coord
 
 for bond in layer:

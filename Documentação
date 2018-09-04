@@ -9,3 +9,11 @@ obst_x = Coordenadas dos obstaculos de X
 obst_y = Coordenadas dos obstaculos de Y
 
 dist_obj = distancia dos pontos de Steiner do objeto
+
+Tomar nota que:
+
+Pontos independem de camadas, todas serão feitos juntos.
+
+Será feito uma árvore entre todos os vértices com a distancia minima entre eles
+
+Logo, serão excluidos pontos que nao fazem parte de caminhos entre componentes

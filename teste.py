@@ -1,11 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# grafo completo x e y        , no prim x, no prim y, preços das arestas, vertice atual x e y
-def PRIM(graph_cp_x,graph_cp_y, in_prim_x, in_prim_y, price_aresta, vert_x, vert_y):
-    pos_x = graph_cp_x.index(vert_x)
-    pos_y = graph_cp_y.index(vert_y)
+class nodos(object):
+    def __init__(self, x, y):
+              self._x = x
+              self._y = y
 
-#               gr
+def PRIM(graph_cp):
+    vertices_comp
+
+
 def without_Comp(graph_prim):
 
 
@@ -108,13 +111,19 @@ arq.close()
 #Criar como surgir os vertices de encontros de linhas e colunas
 #Criar como navegar pelas arestas dos vertices que serao criados
 
+#ponto de componente inicial
+x_init = com_x[0]
+y_init = com_y[0]
+
 #Ordena vertices
 #####################################
 for bond in layer:
     for lay in bond:
         lay.sort()
-    termos_x = bond[0]
-    termos_y = bond[1]
+    pos_x_init = bond[0].index(x_init)
+    pos_y_init = bond[1].index(y_init)
+print pos_x_init
+print pos_y_init
 print bondary_coord
 
 for bond in layer:
@@ -122,5 +131,3 @@ for bond in layer:
 
 print obst_x
 print obst_y
-#todos componentes em x e y, pontos de componente inicial
-prim = PRIM(termos_x,termos_y,com_x[0],com_y[0])

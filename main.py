@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# grafo completo x e y        , no prim x, no prim y, preços das arestas, vertice atual x e y
-def PRIM(graph_cp_x,graph_cp_y, in_prim_x, in_prim_y, price_aresta, vert_x, vert_y):
+# grafo completo x e y, no prim x e y e preços das arestas, vertice atual x e y
+def PRIM(graph_cp_x,graph_cp_y, graph_prim, vert_x, vert_y):
     pos_x = graph_cp_x.index(vert_x)
     pos_y = graph_cp_y.index(vert_y)
 
-#               gr
+#Utilizando o grafo de prim para retirar os nao arestas componentes
 def without_Comp(graph_prim):
 
 
@@ -122,5 +122,10 @@ for bond in layer:
 
 print obst_x
 print obst_y
+#Grafo vazio para prim
+prim = []
+for num in range(3):
+    list1 = []
+    prim.append(list1)
 #todos componentes em x e y, pontos de componente inicial
 prim = PRIM(termos_x,termos_y,com_x[0],com_y[0])

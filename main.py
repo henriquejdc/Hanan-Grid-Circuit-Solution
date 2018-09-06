@@ -1,12 +1,25 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# grafo completo x e y, no prim x e y e preços das arestas, vertice atual x e y
-def PRIM(graph_cp_x, graph_cp_y, graph_prim, vert_x, vert_y, vert_comp):
+# grafo completo x e y, no prim x e y e preços das arestas, vertice atual x e y, componentes,tipo pai
+#type 1 é componente e 0 nao componente
+def PRIM(graph_cp_x, graph_cp_y, graph_prim, vert_x, vert_y, vert_comp,type_pai):
     pos_x = graph_cp_x.index(vert_x)
     pos_y = graph_cp_y.index(vert_y)
+    #ir pra esquerda
+    if(pos_x-1 > -1):
+    #ir pra direita
+    if(pos_x+1 < len(graph_cp_x-1))
+    #para baixo
+    if(pos_y+1 > -1)
+    #para cima
+    if(pos_y+1 < len(graph_cp_y-1))
 
+
+    if (graph in graph_prim[0] and vert_y in graph_prim[1]):
+
+    else :
 #Utilizando o grafo de prim para retirar os nao arestas componentes
-def without_Comp(graph_prim):
+#def without_Comp(graph_prim):
 
 
 #Layers
@@ -117,13 +130,22 @@ for bond in layer:
     termos_y = bond[1]
 
 componentes = []
+for numerado in range(2):
+    list1 = []
+    componentes.append(list1)
+
 componentes[0] = com_x
 componentes[1] = com_y
 
 #Grafo vazio para prim
 prim = []
-for numerados in range(3):
+for numerados in range(5):
     list1 = []
     prim.append(list1)
 #todos componentes em x e y, pontos de componente inicial
-prim = PRIM(termos_x, termos_y, prim, com_x[0], com_y[0])
+prim[0].append(com_x[0])
+prim[1].append(com_y[0])
+prim[2].append(com_x[0])
+prim[3].append(com_y[0])
+prim[4].append(0)
+prim = PRIM(termos_x, termos_y, prim, com_x[0], com_y[0], componentes, 1)

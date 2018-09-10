@@ -2,22 +2,86 @@
 # -*- coding: utf-8 -*-
 # grafo completo x e y, no prim x e y e preços das arestas, vertice atual x e y, componentes,tipo pai
 #type 1 é componente e 0 nao componente
-def PRIM(graph_cp_x, graph_cp_y, graph_prim, vert_x, vert_y, vert_comp,type_pai):
+def PRIM(graph_cp_x, graph_cp_y, graph_prim, vert_x, vert_y, vert_comp,type_pai,custo_r):
     pos_x = graph_cp_x.index(vert_x)
     pos_y = graph_cp_y.index(vert_y)
+    menor_custo = 0
+    pos_menor
+    custos = [-1, -1 , -1 , -1]
     #ir pra esquerda
     if(pos_x-1 > -1):
+        if (graph_cp_x[pos_x-1] in graph_prim[0]):
+            pos_yy = graph_prim[0].index(graph_cp_x[pos_x-1])
+            if(vert_y == graph_prim[1][pos_yy])):
+
+        else :
+            graph_prim[0].append(graph_cp_x[pos_x])
+            graph_prim[1].append(vert_y)
+            graph_prim[2].append(graph_cp_x[pos_x-1])
+            graph_prim[3].append(vert_y)
+            custo_aresta =  graph_cp_x[pos_x-1] - vert_x
+            graph_prim[4].append(custo_aresta)
+            custo_r1 = custo_r + custo_arest
+            graph_prim[5].append(custo_r1)
+            custos[0] = custo_r1 + custo_r
     #ir pra direita
-    if(pos_x+1 < len(graph_cp_x-1))
+    if(pos_x+1 < len(graph_cp_x-1)):
+        if (graph_cp_x[pos_x+1] in graph_prim[0]):
+            pos_yy = graph_prim[0].index(graph_cp_x[pos_x+1])
+            if(vert_y == graph_prim[1][pos_yy])):
+
+        else :
+            graph_prim[0].append(graph_cp_x[pos_x])
+            graph_prim[1].append(vert_y)
+            graph_prim[2].append(graph_cp_x[pos_x+1])
+            graph_prim[3].append(vert_y)
+            custo_aresta =  graph_cp_x[pos_x+1] - vert_x
+            graph_prim[4].append(custo_aresta)
+            custo_r2 = custo_r + custo_arest
+            graph_prim[5].append(custo_r1)
+            custos[0] = custo_r2 + custo_r
     #para baixo
-    if(pos_y+1 > -1)
+    if(pos_y-1 > -1):
+        if (graph_cp_y[pos_y-1] in graph_prim[1]):
+            pos_xx = graph_prim[1].index(graph_cp_y[pos_y-1])
+            if(vert_x == graph_prim[1][pos_xx])):
+
+        else :
+            graph_prim[0].append(graph_cp_y[pos_y])
+            graph_prim[1].append(vert_x)
+            graph_prim[2].append(graph_cp_y[pos_y-1])
+            graph_prim[3].append(vert_x)
+            custo_aresta =  graph_cp_x[pos_y-1] - vert_y
+            graph_prim[4].append(custo_aresta)
+            custo_r3 = custo_r + custo_arest
+            graph_prim[5].append(custo_r1)
+            custos[0] = custo_r3 + custo_r
     #para cima
-    if(pos_y+1 < len(graph_cp_y-1))
+    if(pos_y+1 < len(graph_cp_y-1)):
+        if (graph_cp_y[pos_y+1] in graph_prim[1]):
+            pos_xx = graph_prim[1].index(graph_cp_y[pos_y+1])
+            if(vert_x == graph_prim[1][pos_xx])):
 
+        else :
+            graph_prim[0].append(graph_cp_y[pos_y])
+            graph_prim[1].append(vert_x)
+            graph_prim[2].append(graph_cp_y[pos_y+1])
+            graph_prim[3].append(vert_x)
+            custo_aresta =  graph_cp_x[pos_y-1] - vert_y
+            graph_prim[4].append(custo_aresta)
+            custo_r3 = custo_r + custo_arest
+            graph_prim[5].append(custo_r1)
+            custos[0] = custo_r3 + custo_r
 
-    if (graph in graph_prim[0] and vert_y in graph_prim[1]):
-
-    else :
+    while(custos[0] > 0 and custos[1] > 0 and custos[2] > 0 and custos[3] > 0):
+        i = 0
+        for num in custos:
+            i++
+            if(num<menor_custo and num>0)
+                pos_menor = i
+                menor_custo = num
+        prim()
+    return graph_prim
 #Utilizando o grafo de prim para retirar os nao arestas componentes
 #def without_Comp(graph_prim):
 
@@ -139,7 +203,7 @@ componentes[1] = com_y
 
 #Grafo vazio para prim
 prim = []
-for numerados in range(5):
+for numerados in range(6):
     list1 = []
     prim.append(list1)
 #todos componentes em x e y, pontos de componente inicial
@@ -148,4 +212,6 @@ prim[1].append(com_y[0])
 prim[2].append(com_x[0])
 prim[3].append(com_y[0])
 prim[4].append(0)
-prim = PRIM(termos_x, termos_y, prim, com_x[0], com_y[0], componentes, 1)
+prim[5].append(0)
+
+prim = PRIM(termos_x, termos_y, prim, com_x[0], com_y[0], componentes, 1,0)

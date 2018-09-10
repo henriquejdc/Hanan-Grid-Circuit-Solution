@@ -10,7 +10,7 @@ def PRIM(graph_cp_x, graph_cp_y, graph_prim, vert_x, vert_y, vert_comp,type_pai,
     custos = [-1, -1 , -1 , -1]
     #ir pra esquerda
     if(pos_x-1 > -1):
-        if (graph_cp_x[pos_x-1] in graph_prim[0]):
+        if (graph_cp_x[pos_x-1] in graph_prim[3]):
             pos_yy = graph_prim[0].index(graph_cp_x[pos_x-1])
             if(vert_y == graph_prim[1][pos_yy])):
 
@@ -26,7 +26,7 @@ def PRIM(graph_cp_x, graph_cp_y, graph_prim, vert_x, vert_y, vert_comp,type_pai,
             custos[0] = custo_r1 + custo_r
     #ir pra direita
     if(pos_x+1 < len(graph_cp_x-1)):
-        if (graph_cp_x[pos_x+1] in graph_prim[0]):
+        if (graph_cp_x[pos_x+1] in graph_prim[3]):
             pos_yy = graph_prim[0].index(graph_cp_x[pos_x+1])
             if(vert_y == graph_prim[1][pos_yy])):
 
@@ -42,7 +42,7 @@ def PRIM(graph_cp_x, graph_cp_y, graph_prim, vert_x, vert_y, vert_comp,type_pai,
             custos[0] = custo_r2 + custo_r
     #para baixo
     if(pos_y-1 > -1):
-        if (graph_cp_y[pos_y-1] in graph_prim[1]):
+        if (graph_cp_y[pos_y-1] in graph_prim[4]):
             pos_xx = graph_prim[1].index(graph_cp_y[pos_y-1])
             if(vert_x == graph_prim[1][pos_xx])):
 
@@ -58,7 +58,7 @@ def PRIM(graph_cp_x, graph_cp_y, graph_prim, vert_x, vert_y, vert_comp,type_pai,
             custos[0] = custo_r3 + custo_r
     #para cima
     if(pos_y+1 < len(graph_cp_y-1)):
-        if (graph_cp_y[pos_y+1] in graph_prim[1]):
+        if (graph_cp_y[pos_y+1] in graph_prim[4]):
             pos_xx = graph_prim[1].index(graph_cp_y[pos_y+1])
             if(vert_x == graph_prim[1][pos_xx])):
 

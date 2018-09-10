@@ -21,9 +21,9 @@ def PRIM(graph_cp_x, graph_cp_y, graph_prim, vert_x, vert_y, vert_comp,type_pai,
             graph_prim[3].append(vert_y)
             custo_aresta =  graph_cp_x[pos_x-1] - vert_x
             graph_prim[4].append(custo_aresta)
-            custo_r1 = custo_r + custo_arest
+            custo_r1 = custo_r + custo_aresta
             graph_prim[5].append(custo_r1)
-            custos[0] = custo_r1 + custo_r
+            custos[0] = custo_r1 + custo_r #Aresta custo trocar = custo Aresta
     #ir pra direita
     if(pos_x+1 < len(graph_cp_x-1)):
         if (graph_cp_x[pos_x+1] in graph_prim[3]):
@@ -35,11 +35,11 @@ def PRIM(graph_cp_x, graph_cp_y, graph_prim, vert_x, vert_y, vert_comp,type_pai,
             graph_prim[1].append(vert_y)
             graph_prim[2].append(graph_cp_x[pos_x+1])
             graph_prim[3].append(vert_y)
-            custo_aresta =  graph_cp_x[pos_x+1] - vert_x
+            custo_aresta =  vert_x - graph_cp_x[pos_x+1]
             graph_prim[4].append(custo_aresta)
-            custo_r2 = custo_r + custo_arest
+            custo_r2 = custo_r + custo_aresta
             graph_prim[5].append(custo_r1)
-            custos[0] = custo_r2 + custo_r
+            custos[1] = custo_r2 + custo_r #Aresta custo trocar = custo Aresta
     #para baixo
     if(pos_y-1 > -1):
         if (graph_cp_y[pos_y-1] in graph_prim[4]):
@@ -51,11 +51,11 @@ def PRIM(graph_cp_x, graph_cp_y, graph_prim, vert_x, vert_y, vert_comp,type_pai,
             graph_prim[1].append(vert_x)
             graph_prim[2].append(graph_cp_y[pos_y-1])
             graph_prim[3].append(vert_x)
-            custo_aresta =  graph_cp_x[pos_y-1] - vert_y
+            custo_aresta = vert_y - graph_cp_x[pos_y-1]
             graph_prim[4].append(custo_aresta)
-            custo_r3 = custo_r + custo_arest
+            custo_r3 = custo_r + custo_aresta
             graph_prim[5].append(custo_r1)
-            custos[0] = custo_r3 + custo_r
+            custos[2] = custo_r3 + custo_r #Aresta custo trocar = custo Aresta
     #para cima
     if(pos_y+1 < len(graph_cp_y-1)):
         if (graph_cp_y[pos_y+1] in graph_prim[4]):
@@ -69,18 +69,19 @@ def PRIM(graph_cp_x, graph_cp_y, graph_prim, vert_x, vert_y, vert_comp,type_pai,
             graph_prim[3].append(vert_x)
             custo_aresta =  graph_cp_x[pos_y-1] - vert_y
             graph_prim[4].append(custo_aresta)
-            custo_r3 = custo_r + custo_arest
+            custo_r3 = custo_r + custo_aresta
             graph_prim[5].append(custo_r1)
-            custos[0] = custo_r3 + custo_r
+            custos[3] = custo_r4 + custo_r #Aresta custo trocar = custo Aresta
 
     while(custos[0] > 0 and custos[1] > 0 and custos[2] > 0 and custos[3] > 0):
         i = 0
         for num in custos:
             i++
             if(num<menor_custo and num>0)
+                custos[i] = -1
                 pos_menor = i
                 menor_custo = num
-        prim()
+        prim(graph_cp_x,graph_cp_y,graph_prim, ___ , ___ , componentes, tipo_vert, )
     return graph_prim
 #Utilizando o grafo de prim para retirar os nao arestas componentes
 #def without_Comp(graph_prim):

@@ -12,11 +12,19 @@ dist_obj = 5
 prim = []
 
 def verificar_obstaculo_esq(atual_x, atual_y, prox_x, prox_y):
-    if x ==1 :
-        x = 1
+    i = 0
+    for x in obst_x:
+        if i % 2 == 0 and x > atual_x :
+            if atual_y > obst_y[i+1] and atual_y <= obst_y[i]:
+                return 1
+    i = i+1
 def verificar_obstaculo_dir(atual_x, atual_y, prox_x, prox_y):
-    if x ==1 :
-        x=1
+    i = 0
+    for x in obst_x:
+        if i % 2 == 0 and x > atual_x :
+            if atual_y > obst_y[i] and atual_y <= obst_y[i+1]:
+                return 1
+    i = i+1
 def verificar_obstaculo_cima(atual_x, atual_y, prox_x, prox_y):
     if x ==1 :
         x=1
@@ -82,7 +90,7 @@ def PRIM(graph_cp_x, graph_cp_y, vert_x, vert_y, vert_comp,type_pai,custo_r):
             custo_aresta =  graph_cp_x[pos_x+1] - vert_x
             prim[4].append(custo_aresta)
             custo_r2 = custo_r + custo_aresta
-            prim[5].append(custo_r1)
+            prim[5].append(custo_r2)
             custos[1] = custo_r2 + custo_r #Aresta custo trocar = custo Aresta
     #para baixo
     if(pos_y-1 > -1):
@@ -107,7 +115,7 @@ def PRIM(graph_cp_x, graph_cp_y, vert_x, vert_y, vert_comp,type_pai,custo_r):
             custo_aresta = vert_y - graph_cp_x[pos_y-1]
             prim[4].append(custo_aresta)
             custo_r3 = custo_r + custo_aresta
-            prim[5].append(custo_r1)
+            prim[5].append(custo_r3)
             custos[2] = custo_r3 + custo_r #Aresta custo trocar = custo Aresta
     #para cima
     auxiliar = len(graph_cp_y)
@@ -133,7 +141,7 @@ def PRIM(graph_cp_x, graph_cp_y, vert_x, vert_y, vert_comp,type_pai,custo_r):
             custo_aresta =  graph_cp_x[pos_y+1] - vert_y
             prim[4].append(custo_aresta)
             custo_r4 = custo_r + custo_aresta
-            prim[5].append(custo_r1)
+            prim[5].append(custo_r4)
             custos[3] = custo_r4 + custo_r #Aresta custo trocar = custo Aresta
 
     while(custos[0] > 0 and custos[1] > 0 and custos[2] > 0 and custos[3] > 0):
@@ -144,7 +152,7 @@ def PRIM(graph_cp_x, graph_cp_y, vert_x, vert_y, vert_comp,type_pai,custo_r):
                 custos[i] = -1
                 pos_menor = i
                 menor_custo = num
-        prim(graph_cp_x,graph_cp_y,prim, ___ , ___ , componentes, tipo_vert, )
+        prim(graph_cp_x,graph_cp_y, ___ , ___ , componentes, tipo_vert, )
 
 #Utilizando o grafo de prim para retirar os nao arestas componentes
 #def without_Comp(prim):

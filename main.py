@@ -14,23 +14,31 @@ prim = []
 def verificar_obstaculo_esq(atual_x, atual_y, prox_x, prox_y):
     i = 0
     for x in obst_x:
-        if i % 2 == 0 and x > atual_x :
-            if atual_y > obst_y[i+1] and atual_y <= obst_y[i]:
+        if i % 2 == 0 and x < atual_x and x >= prox_x:
+            if atual_y > obst_y[i] and atual_y <= obst_y[i+1]:
                 return 1
     i = i+1
 def verificar_obstaculo_dir(atual_x, atual_y, prox_x, prox_y):
     i = 0
     for x in obst_x:
-        if i % 2 == 0 and x > atual_x :
-            if atual_y > obst_y[i] and atual_y <= obst_y[i+1]:
+        if i % 2 == 0 and x > atual_x and x <= prox_x:and :
+            if (atual_y > obst_y[i] and atual_y <= obst_y[i+1]) :
                 return 1
     i = i+1
 def verificar_obstaculo_cima(atual_x, atual_y, prox_x, prox_y):
-    if x ==1 :
-        x=1
+    i = 0
+    for y in obst_y:
+        if i % 2 == 0 and x < atual_y and x >= prox_y:
+            if atual_x > obst_x[i] and atual_x <= obst_x[i+1]:
+                return 1
+    i = i+1
 def verificar_obstaculo_embaixo(atual_x, atual_y, prox_x, prox_y):
-    if x ==1 :
-        x=1
+    i = 0
+    for y in obst_y:
+        if i % 2 == 0 and x < atual_y and x >= prox_y:
+            if atual_x > obst_x[i] and atual_x <= obst_x[i+1]:
+                return 1
+    i = i+1
 
 
 def PRIM(graph_cp_x, graph_cp_y, vert_x, vert_y, vert_comp,type_pai,custo_r):

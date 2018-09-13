@@ -86,7 +86,7 @@ def adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y, vert_comp):
             prim[3].append(vert_x)
             prim[4].append(vert_y)
 
-def adiciona_resultante(atual_x, atual_y, custo, pai_x,pai_y):
+def adiciona_resultante(atual_x, atual_y, custo,pai_x,pai_y):
 
     prim_resultante[0].append(atual_x)
     prim_resultante[1].append(atual_y)
@@ -108,7 +108,6 @@ def PRIM(graph_cp_x, graph_cp_y, vert_x, vert_y, vert_comp):
     #FAZER A VERIFICAÇÃO DE OBSTACULO ENTRE OS PONTOS OU PONTO NO OBSTACULO
     adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y, vert_comp)
 
-
     while (len(prim[0])!=0):
         menor_custo = min(prim[2])
         pos_menor = prim[2].index(menor_custo)
@@ -121,7 +120,7 @@ def PRIM(graph_cp_x, graph_cp_y, vert_x, vert_y, vert_comp):
             resultado = ("xy"+str(prim[0][pos_menor]+prim[1][pos_menor]))
 
         if not resultado in prim_resultante[5]:
-            adiciona_resultante(prim[0][pos_menor],prim[1][pos_menor],prim[3][pos_menor],vert_x,vert_y)
+            adiciona_resultante(prim[0][pos_menor],prim[1][pos_menor],prim[2][pos_menor],prim[3][pos_menor],prim[4][pos_menor])
             vert_x = prim[0][pos_menor]
             vert_y = prim[1][pos_menor]
             adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y, vert_comp)
@@ -175,12 +174,15 @@ for linha in texto :
 
         elif(pontos[0]=="MetalLayers"): #Which Layers
             layers = int(pontos[2])
-            list = []
-            for num in range(2):
-                list1 = []
-                list.append(list1)
+
             for w in range(layers):
+                list = []
                 layer.append(list)
+
+            for w in range(layers):
+                for num in range(2):
+                    lista = []
+                    layer[w].append(lista)
         else:
             if(pontos[0]=="RoutedVia"): #Don't know
                 bondary = pontos[1]
@@ -229,16 +231,21 @@ arq.close()
 
 #Ordena vertices
 #####################################
+termos_x = []
+termos_y = []
 for bond in layer:
-    for lay in bond:
-        lay = sorted(set(lay))
-    termos_x = bond[0]
-    termos_y = bond[1]
-
+    bond[0] = sorted(set(bond[0]))
+    bond[1] = sorted(set(bond[1]))
+    termos_x = termos_x + bond[0]
+    termos_y = termos_y + bond[1]
+termos_x = sorted(set(termos_x))
+termos_y = sorted(set(termos_y))
+print termos_x
+print termos_y
 componentes = []
 for numerado in range(2):
     list = []
-    componentes.append(list1)
+    componentes.append(list)
 
 componentes[0] = com_x
 componentes[1] = com_y
@@ -260,6 +267,7 @@ teta = []
 for numeradosss in range(len(prim_resultante[0])):
     list1 = []
     teta.append(list1)
+
 for test in prim_resultante:
     xxt = 0
     for test2 in test:

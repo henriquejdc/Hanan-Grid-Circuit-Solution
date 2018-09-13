@@ -10,7 +10,7 @@ dist_obj = 5
 
 #Grafo vazio para prim tamanho 0-5 posições
 prim = []
-
+prim_resultante = []
 def verificar_obstaculo_esq(atual_x, atual_y, prox_x, prox_y):
     i = 0
     for x in obst_x:
@@ -43,64 +43,62 @@ def verificar_obstaculo_embaixo(atual_x, atual_y, prox_x, prox_y):
 def ser_componente(componentes, vert_x, vert_y):
     print "1"
 
-def PRIM(graph_cp_x, graph_cp_y, vert_x, vert_y, vert_comp):
+def adiciona_queue(pos_x, pos_y, graph_cp_x, graph_cp_y, vert_x, vert_y, vert_comp):
     pos_x = graph_cp_x.index(vert_x)
     pos_y = graph_cp_y.index(vert_y)
-    menor_custo = 0
-    pos_menor = 0
-    custos = [-1, -1 , -1 , -1]
-    #FAZER A VERIFICAÇÃO DE OBSTACULO ENTRE OS PONTOS OU PONTO NO OBSTACULO
-    #ir pra esquerda
+
     if(pos_x-1 > -1):
             #condição de obstaculo
             prim[0].append(graph_cp_x[pos_x-1])
             prim[1].append(vert_y)
-            prim[2].append(0)
+            #verifcar se é componente
             custo_aresta =  vert_x - graph_cp_x[pos_x-1]
-            prim[3].append(custo_aresta)
-            prim[4].append(vert_x)
-            prim[5].append(vert_y)
+            prim[2].append(custo_aresta)
+            prim[3].append(vert_x)
+            prim[4].append(vert_y)
+            prim[5].append(0)
     #ir pra direita
     auxiliar = len(graph_cp_x)
     if(pos_x+1 < auxiliar):
         #condição de obstaculo
             prim[0].append(graph_cp_x[pos_x+1])
             prim[1].append(vert_y)
-            prim[2].append(0)
-            custo_aresta =   graph_cp_x[pos_x+1]
-            prim[3].append(custo_aresta)
-            prim[4].append(vert_x)
-            prim[5].append(vert_y)
+            custo_aresta =  graph_cp_x[pos_x+1]
+            prim[2].append(custo_aresta)
+            prim[3].append(vert_x)
+            prim[4].append(vert_y)
+            prim[5].append(0)
     #para baixo
     if(pos_y-1 > -1):
         #condição de obstaculo
             prim[0].append(graph_cp_y[pos_y-1])
             prim[1].append(vert_x)
-            prim[2].append(0)
             custo_aresta = vert_y - graph_cp_x[pos_y-1]
-            prim[3].append(custo_aresta)
-            prim[4].append(vert_x)
-            prim[5].append(vert_y)
+            prim[2].append(custo_aresta)
+            prim[3].append(vert_x)
+            prim[4].append(vert_y)
+            prim[5].append(0)
     #para cima
     auxiliar = len(graph_cp_y)
     if(pos_y+1 < auxiliar):
         #condição de obstaculo
             prim[0].append(graph_cp_y[pos_y+1])
             prim[1].append(vert_x)
-            prim[2].append(0)
-            prim[3].append(vert_x)
             custo_aresta =  graph_cp_x[pos_y+1] - vert_y
-            prim[4].append(custo_aresta)
-            custo_r4 = custo_r + custo_aresta
-            prim[5].append(custo_r4)
-            custos[3] = custo_r4 + custo_r #Aresta custo trocar = custo Aresta
+            prim[2].append(custo_aresta)
+            prim[3].append(vert_x)
+            prim[4].append(vert_y)
+            prim[5].append(0)
 
-    while()
+def PRIM(graph_cp_x, graph_cp_y, vert_x, vert_y, vert_comp):
+    menor_custo = 0
+    pos_menor = 0
+    custos = [-1, -1 , -1 , -1]
+    #FAZER A VERIFICAÇÃO DE OBSTACULO ENTRE OS PONTOS OU PONTO NO OBSTACULO
+    adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y, vert_comp)
 
-#Utilizando o grafo de prim para retirar os nao arestas componentes
-#def without_Comp(prim):
-
-
+    while len(prim[0]!=0):
+        
 #Layers
 layer = []
 #Bord Left
@@ -212,14 +210,19 @@ componentes[1] = com_y
 for numerados in range(6):
     list1 = []
     prim.append(list1)
-#Vertex atual x 0, y 1, visita 0 f 1 v, custo, vertice pai x, pai y
-prim[0].append(com_x[0])
-prim[1].append(com_y[0])
-prim[2].append(1)
-prim[3].append(0)
-prim[4].append(-1)
-prim[5].append(-1)
+    prim_resultante.append(list1)
 
+prim_resultante[0].append(com_x[0])
+prim_resultante[1].append(com_y[0])
+prim_resultante[2].append(1)
+prim_resultante[3].append(-1)
+prim_resultante[4].append(-1)
 
+if(com_x[0]>com_y[0]):
+    prim_resultante[5].append("x"+str(com_x[0]+com_y[0]))
+if(com_x[0]<com_y[0]):
+    prim_resultante[5].append("y"+str(com_x[0]+com_y[0]))
+if(com_x[0]==com_y[0]:
+    prim_resultante[5].append("xy"+str(com_x[0]+com_y[0]))
 
 PRIM(termos_x, termos_y, com_x[0], com_y[0], componentes)

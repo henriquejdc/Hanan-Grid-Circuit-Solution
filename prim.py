@@ -43,7 +43,7 @@ def verificar_obstaculo_embaixo(atual_x, atual_y, prox_x, prox_y):
 def ser_componente(componentes, vert_x, vert_y):
     print "1"
 
-def adiciona_queue(pos_x, pos_y, graph_cp_x, graph_cp_y, vert_x, vert_y, vert_comp):
+def adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y, vert_comp):
     pos_x = graph_cp_x.index(vert_x)
     pos_y = graph_cp_y.index(vert_y)
 
@@ -56,7 +56,6 @@ def adiciona_queue(pos_x, pos_y, graph_cp_x, graph_cp_y, vert_x, vert_y, vert_co
             prim[2].append(custo_aresta)
             prim[3].append(vert_x)
             prim[4].append(vert_y)
-            prim[5].append(0)
     #ir pra direita
     auxiliar = len(graph_cp_x)
     if(pos_x+1 < auxiliar):
@@ -67,7 +66,6 @@ def adiciona_queue(pos_x, pos_y, graph_cp_x, graph_cp_y, vert_x, vert_y, vert_co
             prim[2].append(custo_aresta)
             prim[3].append(vert_x)
             prim[4].append(vert_y)
-            prim[5].append(0)
     #para baixo
     if(pos_y-1 > -1):
         #condição de obstaculo
@@ -77,18 +75,32 @@ def adiciona_queue(pos_x, pos_y, graph_cp_x, graph_cp_y, vert_x, vert_y, vert_co
             prim[2].append(custo_aresta)
             prim[3].append(vert_x)
             prim[4].append(vert_y)
-            prim[5].append(0)
     #para cima
     auxiliar = len(graph_cp_y)
     if(pos_y+1 < auxiliar):
         #condição de obstaculo
             prim[0].append(graph_cp_y[pos_y+1])
             prim[1].append(vert_x)
-            custo_aresta =  graph_cp_x[pos_y+1] - vert_y
+            custo_aresta = graph_cp_x[pos_y+1] - vert_y
             prim[2].append(custo_aresta)
             prim[3].append(vert_x)
             prim[4].append(vert_y)
             prim[5].append(0)
+
+def adiciona_resultante(atual_x, atual_y, custo, pai_x,pai_y):
+    prim_resultante[0].append(atua_x[0])
+    prim_resultante[1].append(atual_y[0])
+    prim_resultante[2].append(custo)
+    prim_resultante[3].append(pai_x)
+    prim_resultante[4].append(pai_y)
+
+    if(atual_x>atual_y):
+        prim_resultante[5].append("x"+str(atual_x+atual_y))
+    if(atual_x<atual_y)):
+        prim_resultante[5].append("y"+str(atual_x+atual_y))
+    if(atual_x==atual_y):
+        prim_resultante[5].append("xy"+str(atual_x+atual_y))
+
 
 def PRIM(graph_cp_x, graph_cp_y, vert_x, vert_y, vert_comp):
     menor_custo = 0
@@ -98,7 +110,28 @@ def PRIM(graph_cp_x, graph_cp_y, vert_x, vert_y, vert_comp):
     adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y, vert_comp)
 
     while len(prim[0]!=0):
-        
+        menor_custo = min(prim[2])
+        pos_menor = prim[2].index(menor_custo)
+
+        if(prim[0][pos_menor]>prim[1][pos_menor]):
+            resultado = ("x"+str(atual_x[0]+atual_y[0]))
+        if(prim[0][pos_menor]<prim[1][pos_menor]):
+            resultado = ("y"+str(atual_x[0]+atual_y[0]))
+        if(prim[0][pos_menor]==prim[1][pos_menor]):
+            resultado = ("xy"+str(atual_x[0]+atual_y[0]))
+
+        if resultado in prim_resultante[5]:
+            adiciona_resultante(prim[0][pos_menor],prim[1][pos_menor],prim[3][pos_menor],vert_x,vert_y)
+            vert_x = prim[0][pos_menor]
+            vert_y = prim[1][pos_menor]
+            del prim[0][pos_menor]
+            del prim[1][pos_menor]
+            del prim[2][pos_menor]
+            del prim[3][pos_menor]
+            del prim[4][pos_menor]
+            del prim[5][pos_menor]
+            adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y, vert_comp):
+
 #Layers
 layer = []
 #Bord Left
@@ -209,20 +242,8 @@ componentes[1] = com_y
 
 for numerados in range(6):
     list1 = []
-    prim.append(list1)
+    if(numerados!=5)prim.append(list1)
     prim_resultante.append(list1)
 
-prim_resultante[0].append(com_x[0])
-prim_resultante[1].append(com_y[0])
-prim_resultante[2].append(1)
-prim_resultante[3].append(-1)
-prim_resultante[4].append(-1)
-
-if(com_x[0]>com_y[0]):
-    prim_resultante[5].append("x"+str(com_x[0]+com_y[0]))
-if(com_x[0]<com_y[0]):
-    prim_resultante[5].append("y"+str(com_x[0]+com_y[0]))
-if(com_x[0]==com_y[0]:
-    prim_resultante[5].append("xy"+str(com_x[0]+com_y[0]))
-
+adiciona_resultante(com_x[0],com_y[0],0,-1,-1)
 PRIM(termos_x, termos_y, com_x[0], com_y[0], componentes)

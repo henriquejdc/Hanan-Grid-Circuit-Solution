@@ -62,16 +62,16 @@ def adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y, vert_comp):
         #condição de obstaculo
             prim[0].append(graph_cp_x[pos_x+1])
             prim[1].append(vert_y)
-            custo_aresta =  graph_cp_x[pos_x+1]
+            custo_aresta =  graph_cp_x[pos_x+1] - vert_x
             prim[2].append(custo_aresta)
             prim[3].append(vert_x)
             prim[4].append(vert_y)
     #para baixo
     if(pos_y-1 > -1):
         #condição de obstaculo
-            prim[0].append(graph_cp_y[pos_y-1])
-            prim[1].append(vert_x)
-            custo_aresta = vert_y - graph_cp_x[pos_y-1]
+            prim[0].append(vert_x)
+            prim[1].append(graph_cp_y[pos_y-1])
+            custo_aresta = vert_y - graph_cp_y[pos_y-1]
             prim[2].append(custo_aresta)
             prim[3].append(vert_x)
             prim[4].append(vert_y)
@@ -79,9 +79,9 @@ def adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y, vert_comp):
     auxiliar = len(graph_cp_y)
     if(pos_y+1 < auxiliar):
         #condição de obstaculo
-            prim[0].append(graph_cp_y[pos_y+1])
-            prim[1].append(vert_x)
-            custo_aresta = graph_cp_x[pos_y+1] - vert_y
+            prim[0].append(vert_x)
+            prim[1].append(graph_cp_y[pos_y+1])
+            custo_aresta = graph_cp_y[pos_y+1] - vert_y
             prim[2].append(custo_aresta)
             prim[3].append(vert_x)
             prim[4].append(vert_y)
@@ -108,6 +108,7 @@ def PRIM(graph_cp_x, graph_cp_y, vert_x, vert_y, vert_comp):
     #FAZER A VERIFICAÇÃO DE OBSTACULO ENTRE OS PONTOS OU PONTO NO OBSTACULO
     adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y, vert_comp)
 
+
     while (len(prim[0])!=0):
         menor_custo = min(prim[2])
         pos_menor = prim[2].index(menor_custo)
@@ -129,7 +130,7 @@ def PRIM(graph_cp_x, graph_cp_y, vert_x, vert_y, vert_comp):
             if prim_resultante[2][posicao] > prim[2][pos_menor]:
                 for i in range(6):
                     del prim_resultante[i][posicao]
-                adiciona_resultante(prim[0][pos_menor],prim[1][pos_menor],prim[3][pos_menor],vert_x,vert_y)
+                adiciona_resultante(prim[0][pos_menor],prim[1][pos_menor],prim[2][pos_menor],vert_x,vert_y)
 
         for i in range(5):
             del prim[i][pos_menor]
@@ -236,22 +237,36 @@ for bond in layer:
 
 componentes = []
 for numerado in range(2):
-    list1 = []
+    list = []
     componentes.append(list1)
 
 componentes[0] = com_x
 componentes[1] = com_y
 
-for numerados in range(6):
+for numerados in range(5):
     list1 = []
-    if(numerados!=5):
-        prim.append(list1)
-    prim_resultante.append(list1)
+    prim.append(list1)
+
+for numerados in range(6):
+    list2 = []
+    prim_resultante.append(list2)
+
 
 adiciona_resultante(com_x[0],com_y[0],0,-1,-1)
-print prim_resultante
-print termos_x
-print termos_y
-print com_x[0]
-print com_y[0]
 PRIM(termos_x, termos_y, com_x[0], com_y[0], componentes)
+
+arq = open('out.txt', 'w')
+teta = []
+for numeradosss in range(len(prim_resultante[0])):
+    list1 = []
+    teta.append(list1)
+for test in prim_resultante:
+    xxt = 0
+    for test2 in test:
+        teta[xxt].append(test2)
+        xxt = xxt + 1
+
+for numeradosss in range(len(prim_resultante[0])):
+    arq.writelines(str(teta[numeradosss])+"\n")
+
+arq.close()

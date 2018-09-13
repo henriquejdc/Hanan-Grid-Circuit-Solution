@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# grafo completo x e y, no prim x e y e preços das arestas, vertice atual x e y, componentes,tipo pai
-#type 1 é componente e 0 nao componente
-
+# FALTA ARRUMAR ARRASTAS/VALORES, VERIFICAÇÃO COMPONENTES E OBSTACULOS
 #Obstacles
 obst_x = []
 obst_y = []
@@ -127,8 +125,8 @@ def PRIM(graph_cp_x, graph_cp_y, vert_x, vert_y, vert_comp):
         else :
             posicao = prim_resultante[5].index(resultado)
             if prim_resultante[2][posicao] > prim[2][pos_menor]:
-                for i in range(6):
-                    del prim_resultante[i][posicao]
+                #for i in range(6):
+                    #del prim_resultante[i][posicao]
                 adiciona_resultante(prim[0][pos_menor],prim[1][pos_menor],prim[2][pos_menor],vert_x,vert_y)
 
         for i in range(5):

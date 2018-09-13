@@ -7,7 +7,9 @@ prim = []
 for numerados in range(3):
     list1 = []
     prim.append(list1)
-
+for numerados in range(3):
+    print "aqui"
+    
 prim[0].append(2)
 prim[0].append(1)
 prim[0].append(2)

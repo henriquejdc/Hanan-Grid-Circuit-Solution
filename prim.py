@@ -21,7 +21,7 @@ def verificar_obstaculo_esq(atual_x, atual_y, prox_x, prox_y):
 def verificar_obstaculo_dir(atual_x, atual_y, prox_x, prox_y):
     i = 0
     for x in obst_x:
-        if i % 2 == 0 and x > atual_x and x <= prox_x:and :
+        if i % 2 == 0 and x > atual_x and x <= prox_x:
             if (atual_y > obst_y[i] and atual_y <= obst_y[i+1]) :
                 return 1
     i = i+1
@@ -85,18 +85,18 @@ def adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y, vert_comp):
             prim[2].append(custo_aresta)
             prim[3].append(vert_x)
             prim[4].append(vert_y)
-            prim[5].append(0)
 
 def adiciona_resultante(atual_x, atual_y, custo, pai_x,pai_y):
-    prim_resultante[0].append(atua_x[0])
-    prim_resultante[1].append(atual_y[0])
+
+    prim_resultante[0].append(atual_x)
+    prim_resultante[1].append(atual_y)
     prim_resultante[2].append(custo)
     prim_resultante[3].append(pai_x)
     prim_resultante[4].append(pai_y)
 
     if(atual_x>atual_y):
         prim_resultante[5].append("x"+str(atual_x+atual_y))
-    if(atual_x<atual_y)):
+    if(atual_x<atual_y):
         prim_resultante[5].append("y"+str(atual_x+atual_y))
     if(atual_x==atual_y):
         prim_resultante[5].append("xy"+str(atual_x+atual_y))
@@ -105,32 +105,34 @@ def adiciona_resultante(atual_x, atual_y, custo, pai_x,pai_y):
 def PRIM(graph_cp_x, graph_cp_y, vert_x, vert_y, vert_comp):
     menor_custo = 0
     pos_menor = 0
-    custos = [-1, -1 , -1 , -1]
     #FAZER A VERIFICAÇÃO DE OBSTACULO ENTRE OS PONTOS OU PONTO NO OBSTACULO
     adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y, vert_comp)
 
-    while len(prim[0]!=0):
+    while (len(prim[0])!=0):
         menor_custo = min(prim[2])
         pos_menor = prim[2].index(menor_custo)
 
         if(prim[0][pos_menor]>prim[1][pos_menor]):
-            resultado = ("x"+str(atual_x[0]+atual_y[0]))
+            resultado = ("x"+str(prim[0][pos_menor]+prim[1][pos_menor]))
         if(prim[0][pos_menor]<prim[1][pos_menor]):
-            resultado = ("y"+str(atual_x[0]+atual_y[0]))
+            resultado = ("y"+str(prim[0][pos_menor]+prim[1][pos_menor]))
         if(prim[0][pos_menor]==prim[1][pos_menor]):
-            resultado = ("xy"+str(atual_x[0]+atual_y[0]))
+            resultado = ("xy"+str(prim[0][pos_menor]+prim[1][pos_menor]))
 
-        if resultado in prim_resultante[5]:
+        if not resultado in prim_resultante[5]:
             adiciona_resultante(prim[0][pos_menor],prim[1][pos_menor],prim[3][pos_menor],vert_x,vert_y)
             vert_x = prim[0][pos_menor]
             vert_y = prim[1][pos_menor]
-            del prim[0][pos_menor]
-            del prim[1][pos_menor]
-            del prim[2][pos_menor]
-            del prim[3][pos_menor]
-            del prim[4][pos_menor]
-            del prim[5][pos_menor]
-            adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y, vert_comp):
+            adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y, vert_comp)
+        else :
+            posicao = prim_resultante[5].index(resultado)
+            if prim_resultante[2][posicao] > prim[2][pos_menor]:
+                for i in range(6):
+                    del prim_resultante[i][posicao]
+                adiciona_resultante(prim[0][pos_menor],prim[1][pos_menor],prim[3][pos_menor],vert_x,vert_y)
+
+        for i in range(5):
+            del prim[i][pos_menor]
 
 #Layers
 layer = []
@@ -242,8 +244,14 @@ componentes[1] = com_y
 
 for numerados in range(6):
     list1 = []
-    if(numerados!=5)prim.append(list1)
+    if(numerados!=5):
+        prim.append(list1)
     prim_resultante.append(list1)
 
 adiciona_resultante(com_x[0],com_y[0],0,-1,-1)
+print prim_resultante
+print termos_x
+print termos_y
+print com_x[0]
+print com_y[0]
 PRIM(termos_x, termos_y, com_x[0], com_y[0], componentes)

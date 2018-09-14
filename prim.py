@@ -41,22 +41,47 @@ def verificar_obstaculo_embaixo(atual_x, atual_y, prox_x, prox_y):
 def ser_componente(componentes, vert_x, vert_y):
     print "1"
 
+def codigo_id(atual_x,atual_y):
+    if(atual_x>atual_y):
+        codigo = ("x"+str(atual_x+atual_y))
+    if(atual_x<atual_y):
+        codigo = ("y"+str(atual_x+atual_y))
+    if(atual_x==atual_y):
+        codigo = ("xy"+str(atual_x+atual_y))
+    return codigo
+
 def adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y, vert_comp):
     pos_x = graph_cp_x.index(vert_x)
     pos_y = graph_cp_y.index(vert_y)
 
-    if(pos_x-1 > -1):
-            #condição de obstaculo
-            prim[0].append(graph_cp_x[pos_x-1])
-            prim[1].append(vert_y)
-            #verifcar se é componente
-            custo_aresta =  vert_x - graph_cp_x[pos_x-1]
-            prim[2].append(custo_aresta)
-            prim[3].append(vert_x)
-            prim[4].append(vert_y)
+    if(pos_x-1 > -1): #COLOCAR CONDIÇÃO Q SE EXISTE NA QUEUE, TROCAR PELO MENOR
+            if (codigo_id(graph_cp_x[pos_x-1],vert_y) in prim[5]):
+                posicao = prim[5].index(codigo_id(graph_cp_x[pos_x-1],vert_y))
+                if(vert_x - graph_cp_x[pos_x-1] < prim[2][posicao]):
+                    prim[2][posicao]= vert_x - graph_cp_x[pos_x-1]
+                    prim[3][posicao]=  vert_x
+                    prim[4][posicao]=  vert_y
+            else:
+                #condição de obstaculo
+                prim[0].append(graph_cp_x[pos_x-1])
+                prim[1].append(vert_y)
+                custo_aresta =  vert_x - graph_cp_x[pos_x-1]
+                prim[2].append(custo_aresta)
+                prim[3].append(vert_x)
+                prim[4].append(vert_y)
+                #verifcar se é componente
+                prim[5].append(codigo_id(graph_cp_x[pos_x-1],vert_y))
+
     #ir pra direita
     auxiliar = len(graph_cp_x)
     if(pos_x+1 < auxiliar):
+        if (codigo_id(graph_cp_x[pos_x+1],vert_y) in prim[5]):
+            posicao = prim[5].index(codigo_id(graph_cp_x[pos_x+1],vert_y))
+            if(graph_cp_x[pos_x+1] - vert_x < prim[2][posicao]):
+                prim[2][posicao]= graph_cp_x[pos_x+1] - vert_x
+                prim[3][posicao]=  vert_x
+                prim[4][posicao]=  vert_y
+        else:
         #condição de obstaculo
             prim[0].append(graph_cp_x[pos_x+1])
             prim[1].append(vert_y)
@@ -64,8 +89,16 @@ def adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y, vert_comp):
             prim[2].append(custo_aresta)
             prim[3].append(vert_x)
             prim[4].append(vert_y)
+            prim[5].append(codigo_id(graph_cp_x[pos_x+1],vert_y))
     #para baixo
     if(pos_y-1 > -1):
+        if (codigo_id(vert_x,graph_cp_y[pos_y-1]) in prim[5]):
+            posicao = prim[5].index(codigo_id(vert_x,graph_cp_y[pos_y-1]))
+            if(vert_y - graph_cp_y[pos_y-1]< prim[2][posicao]):
+                prim[2][posicao]= vert_y - graph_cp_y[pos_y-1]
+                prim[3][posicao]=  vert_x
+                prim[4][posicao]=  vert_y
+        else:
         #condição de obstaculo
             prim[0].append(vert_x)
             prim[1].append(graph_cp_y[pos_y-1])
@@ -73,9 +106,17 @@ def adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y, vert_comp):
             prim[2].append(custo_aresta)
             prim[3].append(vert_x)
             prim[4].append(vert_y)
+            prim[5].append(codigo_id(vert_x,graph_cp_y[pos_y-1]))
     #para cima
     auxiliar = len(graph_cp_y)
     if(pos_y+1 < auxiliar):
+        if (codigo_id(vert_x,graph_cp_y[pos_x+1]) in prim[5]):
+            posicao = prim[5].index(codigo_id(vert_x,graph_cp_y[pos_y+1]))
+            if(graph_cp_y[pos_y+1] - vert_y < prim[2][posicao]):
+                prim[2][posicao]=  graph_cp_y[pos_y+1] - vert_y
+                prim[3][posicao]=  vert_x
+                prim[4][posicao]=  vert_y
+        else:
         #condição de obstaculo
             prim[0].append(vert_x)
             prim[1].append(graph_cp_y[pos_y+1])
@@ -83,6 +124,7 @@ def adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y, vert_comp):
             prim[2].append(custo_aresta)
             prim[3].append(vert_x)
             prim[4].append(vert_y)
+            prim[5].append(codigo_id(vert_x,graph_cp_y[pos_y+1]))
 
 def adiciona_resultante(atual_x, atual_y, custo,pai_x,pai_y):
 
@@ -91,13 +133,7 @@ def adiciona_resultante(atual_x, atual_y, custo,pai_x,pai_y):
     prim_resultante[2].append(custo)
     prim_resultante[3].append(pai_x)
     prim_resultante[4].append(pai_y)
-
-    if(atual_x>atual_y):
-        prim_resultante[5].append("x"+str(atual_x+atual_y))
-    if(atual_x<atual_y):
-        prim_resultante[5].append("y"+str(atual_x+atual_y))
-    if(atual_x==atual_y):
-        prim_resultante[5].append("xy"+str(atual_x+atual_y))
+    prim_resultante[5].append(codigo_id(atual_x,atual_y))
 
 
 def PRIM(graph_cp_x, graph_cp_y, vert_x, vert_y, vert_comp):
@@ -122,15 +158,11 @@ def PRIM(graph_cp_x, graph_cp_y, vert_x, vert_y, vert_comp):
             vert_x = prim[0][pos_menor]
             vert_y = prim[1][pos_menor]
             adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y, vert_comp)
-        else :
-            posicao = prim_resultante[5].index(resultado)
-            if prim_resultante[2][posicao] > prim[2][pos_menor]:
-                #for i in range(6):
-                    #del prim_resultante[i][posicao]
-                adiciona_resultante(prim[0][pos_menor],prim[1][pos_menor],prim[2][pos_menor],vert_x,vert_y)
-
-        for i in range(5):
-            del prim[i][pos_menor]
+            for i in range(5):
+                del prim[i][pos_menor]
+        else:
+            for i in range(5):
+                del prim[i][pos_menor]
 
 #Layers
 layer = []
@@ -248,7 +280,7 @@ for numerado in range(2):
 componentes[0] = com_x
 componentes[1] = com_y
 
-for numerados in range(5):
+for numerados in range(6):
     list1 = []
     prim.append(list1)
 

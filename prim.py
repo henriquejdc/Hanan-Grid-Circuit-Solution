@@ -38,8 +38,11 @@ def verificar_obstaculo_embaixo(atual_x, atual_y, prox_x, prox_y):
                 return 1
     i = i+1
 
-def ser_componente(componentes, vert_x, vert_y):
-    print "1"
+def ser_componente(vert_x, vert_y, componentes):
+    component = 0
+    if(vert_x in componentes[0] and vert_y in componentes[1]):
+        component = 1
+    return 1
 
 def codigo_id(atual_x,atual_y):
     codigo = "x" + str(atual_x)+ "y" + str(atual_y)

@@ -5,5 +5,5 @@ MetalLayers = 1
 #RoutedShapes = 7
 #RoutedVias = 1
 #Obstacles = 3
-#RoutedShape M1 (50,100) (250,150)
+RoutedShape M1 (50,100) (250,150)
 RoutedShape M1 (600,20) (750,140)

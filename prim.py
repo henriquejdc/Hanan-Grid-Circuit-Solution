@@ -46,13 +46,17 @@ def ser_componente(vert_x, vert_y, vert_x_a, vert_y_a):
 
     while x < len(componentes):
         cp = [componentes[x],componentes[x+1],componentes[x+2],componentes[x+3]]
-        if codigo_id(vert_x,vert_y) in componentes and codigo_id(vert_x_a,vert_y_a) in componentes:
+        print cp
+        print codigo_id(vert_x,vert_y)
+        print codigo_id(vert_x_a,vert_y_a)
+        if codigo_id(vert_x,vert_y) in cp and codigo_id(vert_x_a,vert_y_a) in cp:
+            #print "deu certo"
             return 1
         x = x + 4
     return 0
 
 def codigo_id(atual_x,atual_y):
-    codigo = "x" + str(atual_x)+ "y" + str(atual_y)
+    codigo = str(atual_x)+ str(atual_y)
     return codigo
 
 def adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y):
@@ -69,7 +73,7 @@ def adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y):
                 #condição de obstaculo
                 prim[0].append(graph_cp_x[pos_x-1])
                 prim[1].append(vert_y)
-                if ser_componente(vert_x,vert_x,graph_cp_x[pos_x-1], vert_y):
+                if ser_componente(vert_x,vert_y,graph_cp_x[pos_x-1], vert_y):
                     custo_aresta = 0
                 else:
                     custo_aresta =  vert_x - graph_cp_x[pos_x-1]
@@ -92,7 +96,7 @@ def adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y):
         #condição de obstaculo
             prim[0].append(graph_cp_x[pos_x+1])
             prim[1].append(vert_y)
-            if ser_componente(vert_x,vert_x,graph_cp_x[pos_x+1], vert_y):
+            if ser_componente(vert_x,vert_y,graph_cp_x[pos_x+1], vert_y):
                 custo_aresta = 0
             else:
                 custo_aresta =  graph_cp_x[pos_x+1] - vert_x
@@ -112,7 +116,7 @@ def adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y):
         #condição de obstaculo
             prim[0].append(vert_x)
             prim[1].append(graph_cp_y[pos_y-1])
-            if ser_componente(vert_x,vert_x,vert_x, graph_cp_y[pos_y-1]):
+            if ser_componente(vert_x,vert_y,vert_x, graph_cp_y[pos_y-1]):
                 custo_aresta = 0
             else:
                 custo_aresta = vert_y - graph_cp_y[pos_y-1]
@@ -133,7 +137,7 @@ def adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y):
         #condição de obstaculo
             prim[0].append(vert_x)
             prim[1].append(graph_cp_y[pos_y+1])
-            if ser_componente(vert_x,vert_x,vert_x, graph_cp_y[pos_y+1]):
+            if ser_componente(vert_x,vert_y,vert_x, graph_cp_y[pos_y+1]):
                 custo_aresta = 0
             else:
                 custo_aresta = graph_cp_y[pos_y+1] - vert_y
@@ -156,6 +160,8 @@ def PRIM(graph_cp_x, graph_cp_y, vert_x, vert_y):
     menor_custo = 0
     pos_menor = 0
     #FAZER A VERIFICAÇÃO DE OBSTACULO ENTRE OS PONTOS OU PONTO NO OBSTACULO
+    print vert_x
+    print vert_y
     adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y)
 
     while (len(prim[0])!=0):
@@ -263,15 +269,17 @@ for linha in texto :
                     com_x.append(int(ponto_x[1]))
                     com_y.append(int(ponto_y[0]))
                     componentes.append(codigo_id(ponto_x[1],ponto_y[0]))
-                    componentes.append(codigo_id(ponto_y[0],ponto_x[1]))
+                    aux_x = ponto_x[1]
+                    aux_y = ponto_y[0]
                     ponto_x = pontos_usados1[0].split("(")
                     ponto_y = pontos_usados1[1].split(")")
                     layer[int(bondary[1])-1][0].append(int(ponto_x[1]))
                     layer[int(bondary[1])-1][1].append(int(ponto_y[0]))
                     com_x.append(int(ponto_x[1]))
                     com_y.append(int(ponto_y[0]))
+                    componentes.append(codigo_id(aux_x,ponto_y[0]))
                     componentes.append(codigo_id(ponto_x[1],ponto_y[0]))
-                    componentes.append(codigo_id(ponto_y[0],ponto_x[1]))
+                    componentes.append(codigo_id(ponto_x[1],aux_y))
 arq.close()
 
 #Ordena vertices
@@ -285,8 +293,8 @@ for bond in layer:
     termos_y = termos_y + bond[1]
 termos_x = sorted(set(termos_x))
 termos_y = sorted(set(termos_y))
-print termos_x
-print termos_y
+#print termos_x
+#print termos_y
 
 for numerados in range(6):
     list1 = []

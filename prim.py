@@ -43,11 +43,13 @@ def verificar_obstaculo_embaixo(atual_x, atual_y, prox_x, prox_y):
 def ser_componente(vert_x, vert_y, vert_x_a, vert_y_a):
     x = 0
     cp= []
+
     while x < len(componentes):
         cp = [componentes[x],componentes[x+1],componentes[x+2],componentes[x+3]]
         if codigo_id(vert_x,vert_y) in componentes and codigo_id(vert_x_a,vert_y_a) in componentes:
             return 1
         x = x + 4
+    return 0
 
 def codigo_id(atual_x,atual_y):
     codigo = "x" + str(atual_x)+ "y" + str(atual_y)

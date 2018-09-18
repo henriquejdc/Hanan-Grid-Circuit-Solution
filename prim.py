@@ -9,6 +9,8 @@ dist_obj = 5
 #Grafo vazio para prim tamanho 0-5 posições
 prim = []
 prim_resultante = []
+
+componentes = []
 def verificar_obstaculo_esq(atual_x, atual_y, prox_x, prox_y):
     i = 0
     for x in obst_x:
@@ -38,17 +40,20 @@ def verificar_obstaculo_embaixo(atual_x, atual_y, prox_x, prox_y):
                 return 1
     i = i+1
 
-def ser_componente(vert_x, vert_y, componentes):
-    component = 0
-    if(vert_x in componentes[0] and vert_y in componentes[1]):
-        component = 1
-    return 1
+def ser_componente(vert_x, vert_y, vert_x_a, vert_y_a):
+    x = 0
+    cp= []
+    while x < len(componentes):
+        cp = [componentes[x],componentes[x+1],componentes[x+2],componentes[x+3]]
+        if codigo_id(vert_x,vert_y) in componentes and codigo_id(vert_x_a,vert_y_a) in componentes:
+            return 1
+        x = x + 4
 
 def codigo_id(atual_x,atual_y):
     codigo = "x" + str(atual_x)+ "y" + str(atual_y)
     return codigo
 
-def adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y, vert_comp):
+def adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y):
     pos_x = graph_cp_x.index(vert_x)
     pos_y = graph_cp_y.index(vert_y)
     if(pos_x-1 > -1): #COLOCAR CONDIÇÃO Q SE EXISTE NA QUEUE, TROCAR PELO MENOR
@@ -62,7 +67,10 @@ def adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y, vert_comp):
                 #condição de obstaculo
                 prim[0].append(graph_cp_x[pos_x-1])
                 prim[1].append(vert_y)
-                custo_aresta =  vert_x - graph_cp_x[pos_x-1]
+                if ser_componente(vert_x,vert_x,graph_cp_x[pos_x-1], vert_y):
+                    custo_aresta = 0
+                else:
+                    custo_aresta =  vert_x - graph_cp_x[pos_x-1]
                 prim[2].append(custo_aresta)
                 prim[3].append(vert_x)
                 prim[4].append(vert_y)
@@ -82,7 +90,10 @@ def adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y, vert_comp):
         #condição de obstaculo
             prim[0].append(graph_cp_x[pos_x+1])
             prim[1].append(vert_y)
-            custo_aresta =  graph_cp_x[pos_x+1] - vert_x
+            if ser_componente(vert_x,vert_x,graph_cp_x[pos_x+1], vert_y):
+                custo_aresta = 0
+            else:
+                custo_aresta =  graph_cp_x[pos_x+1] - vert_x
             prim[2].append(custo_aresta)
             prim[3].append(vert_x)
             prim[4].append(vert_y)
@@ -99,7 +110,10 @@ def adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y, vert_comp):
         #condição de obstaculo
             prim[0].append(vert_x)
             prim[1].append(graph_cp_y[pos_y-1])
-            custo_aresta = vert_y - graph_cp_y[pos_y-1]
+            if ser_componente(vert_x,vert_x,vert_x, graph_cp_y[pos_y-1]):
+                custo_aresta = 0
+            else:
+                custo_aresta = vert_y - graph_cp_y[pos_y-1]
             prim[2].append(custo_aresta)
             prim[3].append(vert_x)
             prim[4].append(vert_y)
@@ -117,7 +131,10 @@ def adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y, vert_comp):
         #condição de obstaculo
             prim[0].append(vert_x)
             prim[1].append(graph_cp_y[pos_y+1])
-            custo_aresta = graph_cp_y[pos_y+1] - vert_y
+            if ser_componente(vert_x,vert_x,vert_x, graph_cp_y[pos_y+1]):
+                custo_aresta = 0
+            else:
+                custo_aresta = graph_cp_y[pos_y+1] - vert_y
             prim[2].append(custo_aresta)
             prim[3].append(vert_x)
             prim[4].append(vert_y)
@@ -133,11 +150,11 @@ def adiciona_resultante(atual_x, atual_y, custo,pai_x,pai_y):
     prim_resultante[5].append(codigo_id(atual_x,atual_y))
 
 
-def PRIM(graph_cp_x, graph_cp_y, vert_x, vert_y, vert_comp):
+def PRIM(graph_cp_x, graph_cp_y, vert_x, vert_y):
     menor_custo = 0
     pos_menor = 0
     #FAZER A VERIFICAÇÃO DE OBSTACULO ENTRE OS PONTOS OU PONTO NO OBSTACULO
-    adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y, vert_comp)
+    adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y)
 
     while (len(prim[0])!=0):
         menor_custo = min(prim[2])
@@ -149,7 +166,7 @@ def PRIM(graph_cp_x, graph_cp_y, vert_x, vert_y, vert_comp):
             adiciona_resultante(prim[0][pos_menor],prim[1][pos_menor],prim[2][pos_menor],prim[3][pos_menor],prim[4][pos_menor])
             vert_x = prim[0][pos_menor]
             vert_y = prim[1][pos_menor]
-            adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y, vert_comp)
+            adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y)
             for i in range(6):
                 del prim[i][pos_menor]
         else:
@@ -243,12 +260,16 @@ for linha in texto :
                     layer[int(bondary[1])-1][1].append(int(ponto_y[0]))
                     com_x.append(int(ponto_x[1]))
                     com_y.append(int(ponto_y[0]))
+                    componentes.append(codigo_id(ponto_x[1],ponto_y[0]))
+                    componentes.append(codigo_id(ponto_y[0],ponto_x[1]))
                     ponto_x = pontos_usados1[0].split("(")
                     ponto_y = pontos_usados1[1].split(")")
                     layer[int(bondary[1])-1][0].append(int(ponto_x[1]))
                     layer[int(bondary[1])-1][1].append(int(ponto_y[0]))
                     com_x.append(int(ponto_x[1]))
                     com_y.append(int(ponto_y[0]))
+                    componentes.append(codigo_id(ponto_x[1],ponto_y[0]))
+                    componentes.append(codigo_id(ponto_y[0],ponto_x[1]))
 arq.close()
 
 #Ordena vertices
@@ -264,13 +285,6 @@ termos_x = sorted(set(termos_x))
 termos_y = sorted(set(termos_y))
 print termos_x
 print termos_y
-componentes = []
-for numerado in range(2):
-    list = []
-    componentes.append(list)
-
-componentes[0] = com_x
-componentes[1] = com_y
 
 for numerados in range(6):
     list1 = []
@@ -282,7 +296,7 @@ for numerados in range(6):
 
 
 adiciona_resultante(com_x[0],com_y[0],0,-1,-1)
-PRIM(termos_x, termos_y, com_x[0], com_y[0], componentes)
+PRIM(termos_x, termos_y, com_x[0], com_y[0])
 
 arq = open('out.txt', 'w')
 teta = []

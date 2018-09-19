@@ -43,16 +43,20 @@ def verificar_obstaculo_embaixo(atual_x, atual_y, prox_x, prox_y):
 def ser_componente(vert_x, vert_y, vert_x_a, vert_y_a):
     x = 0
     cp= []
-
-    while x < len(componentes):
-        cp = [componentes[x],componentes[x+1],componentes[x+2],componentes[x+3]]
-        print cp
-        print codigo_id(vert_x,vert_y)
-        print codigo_id(vert_x_a,vert_y_a)
-        if codigo_id(vert_x,vert_y) in cp and codigo_id(vert_x_a,vert_y_a) in cp:
-            #print "deu certo"
-            return 1
-        x = x + 4
+    while x < len(componentes[0]):
+        if componentes[1][x] >= vert_y and vert_y <= componentes[1][x+1]:
+            if componentes[1][x] >= vert_y_a and vert_y_a <= componentes[1][x+1]:
+                if componentes[0][x] == vert_x and componentes[0][x] == vert_x_a:
+                    return 1
+                if componentes[0][x+1] == vert_x and componentes[0][x+1] == vert_x_a:
+                    return 1
+        if (componentes[0][x] >= vert_x) and ( vert_x <= componentes[0][x+1]):
+            if componentes[0][x] >= vert_x_a and vert_x_a <= componentes[0][x+1] :
+                if componentes[1][x] == vert_y and componentes[1][x] == vert_y_a:
+                    return 1
+                if componentes[1][x+1] == vert_y and componentes[1][x+1] == vert_y_a:
+                    return 1
+        x = x + 2
     return 0
 
 def codigo_id(atual_x,atual_y):
@@ -160,8 +164,6 @@ def PRIM(graph_cp_x, graph_cp_y, vert_x, vert_y):
     menor_custo = 0
     pos_menor = 0
     #FAZER A VERIFICAÇÃO DE OBSTACULO ENTRE OS PONTOS OU PONTO NO OBSTACULO
-    print vert_x
-    print vert_y
     adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y)
 
     while (len(prim[0])!=0):
@@ -180,147 +182,3 @@ def PRIM(graph_cp_x, graph_cp_y, vert_x, vert_y):
         else:
             for i in range(6):
                 del prim[i][pos_menor]
-
-#Layers
-layer = []
-#Bord Left
-bondary_coord = []
-
-#Vias
-vias_bondary = []
-vias_x = []
-vias_y = []
-#Components
-com_x = []
-com_y = []
-
-arq = open('case.txt', 'r')
-texto = arq.readlines()
-
-for linha in texto :
-    pontos = linha.split(" ")
-    comentado = pontos[0]
-
-    #Ignore Comments
-    if(comentado[0] != "#"):
-        if(pontos[0]=="Boundary"): #bondary
-            #print(pontos)
-            board_left = pontos[2]
-            board_right = pontos[3]
-
-            pontos_usado = board_left.split(")")
-            pontos_usado1 = pontos_usado[0].split("(")
-            pontos_usado_left = pontos_usado1[1].split(",")
-            bondary_coord.append(int(pontos_usado_left[0]))
-            bondary_coord.append(int(pontos_usado_left[1]))
-            pontos_usado = board_right.split(")")
-            pontos_usado1 = pontos_usado[0].split("(")
-            pontos_usado_right = pontos_usado1[1].split(",")
-            bondary_coord.append(int(pontos_usado_right[0]))
-            bondary_coord.append(int(pontos_usado_right[1]))
-
-        elif(pontos[0]=="MetalLayers"): #Which Layers
-            layers = int(pontos[2])
-
-            for w in range(layers):
-                list = []
-                layer.append(list)
-
-            for w in range(layers):
-                for num in range(2):
-                    lista = []
-                    layer[w].append(lista)
-        else:
-            if(pontos[0]=="RoutedVia"): #Don't know
-                bondary = pontos[1]
-                pontos_usados = pontos[2].split(",")
-                ponto_x = pontos_usados[0].split("(")
-                ponto_y = pontos_usados[1].split(")")
-                vias_bondary.append(int(bondary[1]))
-                vias_x.append(int(ponto_x[1]))
-                vias_x.append(int(ponto_y[0]))
-            else:#Shapes and Obstacle
-
-                if(pontos[0]=="Obstacle"):
-                    bondary = pontos[1]
-                    pontos_usados = pontos[2].split(",")
-                    pontos_usados1 = pontos[3].split(",")
-                    ponto_x = pontos_usados[0].split("(")
-                    ponto_y = pontos_usados[1].split(")")
-                    layer[int(bondary[1])-1][0].append(int(ponto_x[1])+dist_obj)
-                    layer[int(bondary[1])-1][1].append(int(ponto_y[0])+dist_obj)
-                    obst_x.append(int(ponto_x[1]))
-                    obst_y.append(int(ponto_y[0]))
-                    ponto_x = pontos_usados1[0].split("(")
-                    ponto_y = pontos_usados1[1].split(")")
-                    layer[int(bondary[1])-1][0].append(int(ponto_x[1])+dist_obj)
-                    layer[int(bondary[1])-1][1].append(int(ponto_y[0])+dist_obj)
-                    obst_x.append(int(ponto_x[1]))
-                    obst_y.append(int(ponto_y[0]))
-
-                else:
-                    bondary = pontos[1]
-                    pontos_usados = pontos[2].split(",")
-                    pontos_usados1 = pontos[3].split(",")
-                    ponto_x = pontos_usados[0].split("(")
-                    ponto_y = pontos_usados[1].split(")")
-                    layer[int(bondary[1])-1][0].append(int(ponto_x[1]))
-                    layer[int(bondary[1])-1][1].append(int(ponto_y[0]))
-                    com_x.append(int(ponto_x[1]))
-                    com_y.append(int(ponto_y[0]))
-                    componentes.append(codigo_id(ponto_x[1],ponto_y[0]))
-                    aux_x = ponto_x[1]
-                    aux_y = ponto_y[0]
-                    ponto_x = pontos_usados1[0].split("(")
-                    ponto_y = pontos_usados1[1].split(")")
-                    layer[int(bondary[1])-1][0].append(int(ponto_x[1]))
-                    layer[int(bondary[1])-1][1].append(int(ponto_y[0]))
-                    com_x.append(int(ponto_x[1]))
-                    com_y.append(int(ponto_y[0]))
-                    componentes.append(codigo_id(aux_x,ponto_y[0]))
-                    componentes.append(codigo_id(ponto_x[1],ponto_y[0]))
-                    componentes.append(codigo_id(ponto_x[1],aux_y))
-arq.close()
-
-#Ordena vertices
-#####################################
-termos_x = []
-termos_y = []
-for bond in layer:
-    bond[0] = sorted(set(bond[0]))
-    bond[1] = sorted(set(bond[1]))
-    termos_x = termos_x + bond[0]
-    termos_y = termos_y + bond[1]
-termos_x = sorted(set(termos_x))
-termos_y = sorted(set(termos_y))
-#print termos_x
-#print termos_y
-
-for numerados in range(6):
-    list1 = []
-    prim.append(list1)
-
-for numerados in range(6):
-    list2 = []
-    prim_resultante.append(list2)
-
-
-adiciona_resultante(com_x[0],com_y[0],0,-1,-1)
-PRIM(termos_x, termos_y, com_x[0], com_y[0])
-
-arq = open('out.txt', 'w')
-teta = []
-for numeradosss in range(len(prim_resultante[0])):
-    list1 = []
-    teta.append(list1)
-
-for test in prim_resultante:
-    xxt = 0
-    for test2 in test:
-        teta[xxt].append(test2)
-        xxt = xxt + 1
-
-for numeradosss in range(len(prim_resultante[0])):
-    arq.writelines(str(teta[numeradosss])+"\n")
-
-arq.close()

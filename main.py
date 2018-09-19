@@ -1,170 +1,4 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-# grafo completo x e y, no prim x e y e preços das arestas, vertice atual x e y, componentes,tipo pai
-#type 1 é componente e 0 nao componente
-
-#Obstacles
-obst_x = []
-obst_y = []
-dist_obj = 5
-
-#Grafo vazio para prim
-prim = []
-
-def verificar_obstaculo_esq(atual_x, atual_y, prox_x, prox_y):
-    i = 0
-    for x in obst_x:
-        if i % 2 == 0 and x < atual_x and x >= prox_x:
-            if atual_y > obst_y[i] and atual_y <= obst_y[i+1]:
-                return 1
-    i = i+1
-def verificar_obstaculo_dir(atual_x, atual_y, prox_x, prox_y):
-    i = 0
-    for x in obst_x:
-        if i % 2 == 0 and x > atual_x and x <= prox_x:and :
-            if (atual_y > obst_y[i] and atual_y <= obst_y[i+1]) :
-                return 1
-    i = i+1
-def verificar_obstaculo_cima(atual_x, atual_y, prox_x, prox_y):
-    i = 0
-    for y in obst_y:
-        if i % 2 == 0 and y > atual_y and y <= prox_y:
-            if atual_x > obst_x[i] and atual_x <= obst_x[i+1]:
-                return 1
-    i = i+1
-def verificar_obstaculo_embaixo(atual_x, atual_y, prox_x, prox_y):
-    i = 0
-    for y in obst_y:
-        if i % 2 == 0 and y < atual_y and y >= prox_y:
-            if atual_x > obst_x[i] and atual_x <= obst_x[i+1]:
-                return 1
-    i = i+1
-
-
-def PRIM(graph_cp_x, graph_cp_y, vert_x, vert_y, vert_comp,type_pai,custo_r):
-    pos_x = graph_cp_x.index(vert_x)
-    pos_y = graph_cp_y.index(vert_y)
-    menor_custo = 0
-    pos_menor = 0
-    custos = [-1, -1 , -1 , -1]
-    #FAZER A VERIFICAÇÃO DE OBSTACULO ENTRE OS PONTOS OU PONTO NO OBSTACULO
-    #ir pra esquerda
-    if(pos_x-1 > -1):
-        if (graph_cp_x[pos_x-1] in prim[3]): # Se ja existe como destino no prim
-            pos_yy = prim[2].index(graph_cp_x[pos_x-1]) #pega a posicão no prim de prim
-            if(vert_y == prim[3][pos_yy]): # Se o y daquela posicao é igual o da linha q esta
-                custo_aresta = vert_x -  graph_cp_x[pos_x-1]
-                custo_r1 = custo_r + custo_aresta
-                if custo_r1 < prim[5][pos_yy]:
-                    prim[0][pos_yy] = graph_cp_x[pos_x]
-                    prim[1][pos_yy] =  vert_y
-                    prim[2][pos_yy] =  graph_cp_x[pos_x-1]
-                    prim[3][pos_yy] =  vert_y
-                    prim[4][pos_yy] =  custo_aresta
-                    prim[5][pos_yy] =  custo_r1
-                    #adicionar nos custos
-        else :
-
-            prim[0].append(graph_cp_x[pos_x])
-            prim[1].append(vert_y)
-            prim[2].append(graph_cp_x[pos_x-1])
-            prim[3].append(vert_y)
-            custo_aresta =  vert_x - graph_cp_x[pos_x-1]
-            prim[4].append(custo_aresta)
-            custo_r1 = custo_r + custo_aresta
-            prim[5].append(custo_r1)
-            custos[0] = custo_r1 + custo_r #Aresta custo trocar = custo Aresta
-    #ir pra direita
-    auxiliar = len(graph_cp_x)
-    if(pos_x+1 < auxiliar):
-        if (graph_cp_x[pos_x+1] in prim[3]):#Se ja existe como destino no prim
-            pos_yy = prim[2].index(graph_cp_x[pos_x+1])
-            if(vert_y == prim[3][pos_yy]):
-                custo_aresta =  graph_cp_x[pos_x+1] - vert_x
-                custo_r2 = custo_r + custo_aresta
-                if custo_r2 < prim[5][pos_yy]:
-                    prim[0][pos_yy] = graph_cp_x[pos_x]
-                    prim[1][pos_yy] =  vert_y
-                    prim[2][pos_yy] =  graph_cp_x[pos_x+1]
-                    prim[3][pos_yy] =  vert_y
-                    prim[4][pos_yy] =  custo_aresta
-                    prim[5][pos_yy] =  custo_r2
-                    #adicionar nos custos
-        else :
-            prim[0].append(graph_cp_x[pos_x])
-            prim[1].append(vert_y)
-            prim[2].append(graph_cp_x[pos_x+1])
-            prim[3].append(vert_y)
-            custo_aresta =  graph_cp_x[pos_x+1] - vert_x
-            prim[4].append(custo_aresta)
-            custo_r2 = custo_r + custo_aresta
-            prim[5].append(custo_r2)
-            custos[1] = custo_r2 + custo_r #Aresta custo trocar = custo Aresta
-    #para baixo
-    if(pos_y-1 > -1):
-        if (graph_cp_y[pos_y-1] in prim[4]):#Se ja existe como destino no prim
-            pos_xx = prim[3].index(graph_cp_y[pos_y-1])
-            if(vert_x == prim[2][pos_xx]):
-                custo_aresta =   vert_y - graph_cp_y[pos_y-1]
-                custo_r3 = custo_r + custo_aresta
-                if custo_r3 < prim[5][pos_xx]:
-                    prim[0][pos_xx] =  vert_x
-                    prim[1][pos_xx] =  graph_cp_x[pos_y]
-                    prim[2][pos_xx] =  vert_x
-                    prim[3][pos_xx] =  graph_cp_x[pos_y-1]
-                    prim[4][pos_xx] =  custo_aresta
-                    prim[5][pos_xx] =  custo_r3
-                    #adicionar nos custos
-        else :
-            prim[0].append(graph_cp_y[pos_y])
-            prim[1].append(vert_x)
-            prim[2].append(graph_cp_y[pos_y-1])
-            prim[3].append(vert_x)
-            custo_aresta = vert_y - graph_cp_x[pos_y-1]
-            prim[4].append(custo_aresta)
-            custo_r3 = custo_r + custo_aresta
-            prim[5].append(custo_r3)
-            custos[2] = custo_r3 + custo_r #Aresta custo trocar = custo Aresta
-    #para cima
-    auxiliar = len(graph_cp_y)
-    if(pos_y+1 < auxiliar):
-        if (graph_cp_y[pos_y+1] in prim[4]): #Se ja existe como destino no prim
-            pos_xx = prim[3].index(graph_cp_y[pos_y+1])
-            if(vert_x == prim[2][pos_xx]):
-                custo_aresta =   vert_y - graph_cp_y[pos_y+1]
-                custo_r4 = custo_r + custo_aresta
-                if custo_r4 < prim[5][pos_xx]:
-                    prim[0][pos_xx] =  vert_x
-                    prim[1][pos_xx] =  graph_cp_x[pos_y]
-                    prim[2][pos_xx] =  vert_x
-                    prim[3][pos_xx] =  graph_cp_x[pos_y+1]
-                    prim[4][pos_xx] =  custo_aresta
-                    prim[5][pos_xx] =  custo_r4
-                    #adicionar nos custos
-        else :
-            prim[0].append(graph_cp_y[pos_y])
-            prim[1].append(vert_x)
-            prim[2].append(graph_cp_y[pos_y+1])
-            prim[3].append(vert_x)
-            custo_aresta =  graph_cp_x[pos_y+1] - vert_y
-            prim[4].append(custo_aresta)
-            custo_r4 = custo_r + custo_aresta
-            prim[5].append(custo_r4)
-            custos[3] = custo_r4 + custo_r #Aresta custo trocar = custo Aresta
-
-    while(custos[0] > 0 and custos[1] > 0 and custos[2] > 0 and custos[3] > 0):
-        i = 0
-        for num in custos:
-            i = i + 1
-            if(num<menor_custo and num>0):
-                custos[i] = -1
-                pos_menor = i
-                menor_custo = num
-        prim(graph_cp_x,graph_cp_y, ___ , ___ , componentes, tipo_vert, )
-
-#Utilizando o grafo de prim para retirar os nao arestas componentes
-#def without_Comp(prim):
-
+from prim import *
 
 #Layers
 layer = []
@@ -206,12 +40,15 @@ for linha in texto :
 
         elif(pontos[0]=="MetalLayers"): #Which Layers
             layers = int(pontos[2])
-            list = []
-            for num in range(2):
-                list1 = []
-                list.append(list1)
+
             for w in range(layers):
+                list = []
                 layer.append(list)
+
+            for w in range(layers):
+                for num in range(2):
+                    lista = []
+                    layer[w].append(lista)
         else:
             if(pontos[0]=="RoutedVia"): #Don't know
                 bondary = pontos[1]
@@ -250,6 +87,8 @@ for linha in texto :
                     layer[int(bondary[1])-1][1].append(int(ponto_y[0]))
                     com_x.append(int(ponto_x[1]))
                     com_y.append(int(ponto_y[0]))
+                    aux_x = ponto_x[1]
+                    aux_y = ponto_y[0]
                     ponto_x = pontos_usados1[0].split("(")
                     ponto_y = pontos_usados1[1].split(")")
                     layer[int(bondary[1])-1][0].append(int(ponto_x[1]))
@@ -260,29 +99,51 @@ arq.close()
 
 #Ordena vertices
 #####################################
+termos_x = []
+termos_y = []
 for bond in layer:
-    for lay in bond:
-        lay = sorted(set(lay))
-    termos_x = bond[0]
-    termos_y = bond[1]
-
-componentes = []
-for numerado in range(2):
-    list1 = []
-    componentes.append(list1)
-
-componentes[0] = com_x
-componentes[1] = com_y
+    bond[0] = sorted(set(bond[0]))
+    bond[1] = sorted(set(bond[1]))
+    termos_x = termos_x + bond[0]
+    termos_y = termos_y + bond[1]
+termos_x = sorted(set(termos_x))
+termos_y = sorted(set(termos_y))
+#print termos_x
+#print termos_y
 
 for numerados in range(6):
     list1 = []
     prim.append(list1)
-#todos componentes em x e y, pontos de componente inicial
-prim[0].append(com_x[0])
-prim[1].append(com_y[0])
-prim[2].append(com_x[0])
-prim[3].append(com_y[0])
-prim[4].append(0)
-prim[5].append(0)
 
-PRIM(termos_x, termos_y, com_x[0], com_y[0], componentes, 1,0)
+for numerados in range(2):
+    list = []
+    componentes.append(list)
+
+componentes[0] = com_x
+componentes[1] = com_y
+
+
+for numerados in range(6):
+    list2 = []
+    prim_resultante.append(list2)
+
+
+adiciona_resultante(com_x[0],com_y[0],0,-1,-1)
+PRIM(termos_x, termos_y, com_x[0], com_y[0])
+
+arq = open('out.txt', 'w')
+teta = []
+for numeradosss in range(len(prim_resultante[0])):
+    list1 = []
+    teta.append(list1)
+
+for test in prim_resultante:
+    xxt = 0
+    for test2 in test:
+        teta[xxt].append(test2)
+        xxt = xxt + 1
+
+for numeradosss in range(len(prim_resultante[0])):
+    arq.writelines(str(teta[numeradosss])+"\n")
+
+arq.close()

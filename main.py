@@ -13,7 +13,7 @@ vias_y = []
 com_x = []
 com_y = []
 
-arq = open('case2.txt', 'r')
+arq = open('case.txt', 'r')
 texto = arq.readlines()
 
 for linha in texto :
@@ -148,4 +148,7 @@ for numeradosss in range(len(prim_resultante[0])):
 
 arq.close()
 
+print layer
 print componentes
+print obst_x
+print obst_y

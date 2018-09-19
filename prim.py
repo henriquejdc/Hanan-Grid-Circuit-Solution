@@ -43,18 +43,26 @@ def verificar_obstaculo_embaixo(atual_x, atual_y, prox_x, prox_y):
 def ser_componente(vert_x, vert_y, vert_x_a, vert_y_a):
     x = 0
     cp= []
+    print vert_x, vert_y, vert_x_a, vert_y_a
     while x < len(componentes[0]):
-        if componentes[1][x] >= vert_y and vert_y <= componentes[1][x+1]:
-            if componentes[1][x] >= vert_y_a and vert_y_a <= componentes[1][x+1]:
+        print vert_y, ">= ", componentes[1][x],"and", vert_y, "<=" ,componentes[1][x+1]
+        if vert_y >= componentes[1][x] and vert_y <= componentes[1][x+1]:
+            print "1", vert_y_a,">=", componentes[1][x] ,"and", vert_y_a ,"<=" ,componentes[1][x+1]
+            if vert_y_a >= componentes[1][x]  and vert_y_a <= componentes[1][x+1]:
                 if componentes[0][x] == vert_x and componentes[0][x] == vert_x_a:
+                    print 1
                     return 1
                 if componentes[0][x+1] == vert_x and componentes[0][x+1] == vert_x_a:
                     return 1
-        if (componentes[0][x] >= vert_x) and ( vert_x <= componentes[0][x+1]):
-            if componentes[0][x] >= vert_x_a and vert_x_a <= componentes[0][x+1] :
+        #print "2",componentes[0][x], ">= ",vert_x, "and", vert_x, "<=" ,componentes[0][x+1]
+        if vert_x >= componentes[0][x] and vert_x <= componentes[0][x+1]:
+            #print "3",componentes[0][x] ,">=", vert_x_a ,"and", vert_x_a ,"<=" ,componentes[0][x+1]
+            if  vert_x_a >= componentes[0][x]and vert_x_a <= componentes[0][x+1] :
                 if componentes[1][x] == vert_y and componentes[1][x] == vert_y_a:
+                    print 1
                     return 1
                 if componentes[1][x+1] == vert_y and componentes[1][x+1] == vert_y_a:
+                    print 1
                     return 1
         x = x + 2
     return 0
@@ -69,6 +77,10 @@ def adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y):
     if(pos_x-1 > -1): #COLOCAR CONDIÇÃO Q SE EXISTE NA QUEUE, TROCAR PELO MENOR
             if (codigo_id(graph_cp_x[pos_x-1],vert_y) in prim[5]):
                 posicao = prim[5].index(codigo_id(graph_cp_x[pos_x-1],vert_y))
+                if ser_componente(vert_x,vert_y,graph_cp_x[pos_x-1], vert_y):
+                    prim[2][posicao]= 0
+                    prim[3][posicao]=  vert_x
+                    prim[4][posicao]=  vert_y
                 if(vert_x - graph_cp_x[pos_x-1] < prim[2][posicao]):
                     prim[2][posicao]= vert_x - graph_cp_x[pos_x-1]
                     prim[3][posicao]=  vert_x
@@ -92,6 +104,10 @@ def adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y):
     if(pos_x+1 < auxiliar):
         if (codigo_id(graph_cp_x[pos_x+1],vert_y) in prim[5]):
             posicao = prim[5].index(codigo_id(graph_cp_x[pos_x+1],vert_y))
+            if ser_componente(vert_x,vert_y,graph_cp_x[pos_x+1], vert_y):
+                prim[2][posicao]= 0
+                prim[3][posicao]=  vert_x
+                prim[4][posicao]=  vert_y
             if(graph_cp_x[pos_x+1] - vert_x < prim[2][posicao]):
                 prim[2][posicao]= graph_cp_x[pos_x+1] - vert_x
                 prim[3][posicao]=  vert_x
@@ -112,7 +128,11 @@ def adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y):
     if(pos_y-1 > -1):
         if (codigo_id(vert_x,graph_cp_y[pos_y-1]) in prim[5]):
             posicao = prim[5].index(codigo_id(vert_x,graph_cp_y[pos_y-1]))
-            if(vert_y - graph_cp_y[pos_y-1]< prim[2][posicao]):
+            if ser_componente(vert_x,vert_y,vert_x, graph_cp_y[pos_y-1]):
+                prim[2][posicao]= 0
+                prim[3][posicao]=  vert_x
+                prim[4][posicao]=  vert_y
+            elif(vert_y - graph_cp_y[pos_y-1]< prim[2][posicao]):
                 prim[2][posicao]= vert_y - graph_cp_y[pos_y-1]
                 prim[3][posicao]=  vert_x
                 prim[4][posicao]=  vert_y
@@ -133,6 +153,10 @@ def adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y):
     if(pos_y+1 < auxiliar):
         if (codigo_id(vert_x,graph_cp_y[pos_y+1]) in prim[5]):
             posicao = prim[5].index(codigo_id(vert_x,graph_cp_y[pos_y+1]))
+            if ser_componente(vert_x,vert_y,vert_x, graph_cp_y[pos_y+1]):
+                prim[2][posicao]= 0
+                prim[3][posicao]=  vert_x
+                prim[4][posicao]=  vert_y
             if(graph_cp_y[pos_y+1] - vert_y < prim[2][posicao]):
                 prim[2][posicao] =  graph_cp_y[pos_y+1] - vert_y
                 prim[3][posicao] =  vert_x

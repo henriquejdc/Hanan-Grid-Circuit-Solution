@@ -13,7 +13,7 @@ vias_y = []
 com_x = []
 com_y = []
 
-arq = open('case.txt', 'r')
+arq = open('case2.txt', 'r')
 texto = arq.readlines()
 
 for linha in texto :
@@ -147,3 +147,5 @@ for numeradosss in range(len(prim_resultante[0])):
     arq.writelines(str(teta[numeradosss])+"\n")
 
 arq.close()
+
+print componentes

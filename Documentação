@@ -17,5 +17,7 @@ Pontos independem de camadas, todas serão feitos juntos,Após sera feito as are
 Será feito uma árvore entre todos os vértices com a distancia minima entre eles usando prim,
 o qual tem adaptações para navegar entre os pontos de Steiner e pontos dentro de um componente,
 
+Quando se adiciona um ponto novo não conhecido na queue e este é componente ou esta dentro das arestas de componentes
+ele tem custo 0
 
 Logo, serão excluidos pontos que nao fazem parte de caminhos entre componentes

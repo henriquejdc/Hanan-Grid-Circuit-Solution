@@ -39,7 +39,7 @@ def verificar_obstaculo_embaixo(atual_x, atual_y, prox_x, prox_y):
             if atual_x > obst_x[i] and atual_x <= obst_x[i+1]:
                 return 1
     i = i+1
-
+##FALTA O CASO ESPECIAL DE PONTOS DENTRO DE COMPONENTES ARRUMAR *
 def ser_componente(vert_x, vert_y, vert_x_a, vert_y_a):
     x = 0
     cp= []
@@ -48,18 +48,12 @@ def ser_componente(vert_x, vert_y, vert_x_a, vert_y_a):
         if vert_y >= componentes[1][x] and vert_y <= componentes[1][x+1]:
             #print "1", vert_y_a,">=", componentes[1][x] ,"and", vert_y_a ,"<=" ,componentes[1][x+1]
             if vert_y_a >= componentes[1][x]  and vert_y_a <= componentes[1][x+1]:
-                if componentes[0][x] == vert_x and componentes[0][x] == vert_x_a:
-                    return 1
-                if componentes[0][x+1] == vert_x and componentes[0][x+1] == vert_x_a:
-                    return 1
+
         #print "2",componentes[0][x], ">= ",vert_x, "and", vert_x, "<=" ,componentes[0][x+1]
-        if vert_x >= componentes[0][x] and vert_x <= componentes[0][x+1]:
+                if vert_x >= componentes[0][x] and vert_x <= componentes[0][x+1]:
             #print "3",componentes[0][x] ,">=", vert_x_a ,"and", vert_x_a ,"<=" ,componentes[0][x+1]
-            if  vert_x_a >= componentes[0][x]and vert_x_a <= componentes[0][x+1] :
-                if componentes[1][x] == vert_y and componentes[1][x] == vert_y_a:
-                    return 1
-                if componentes[1][x+1] == vert_y and componentes[1][x+1] == vert_y_a:
-                    return 1
+                    if  vert_x_a >= componentes[0][x]and vert_x_a <= componentes[0][x+1] :
+                        return 1
         x = x + 2
     return 0
 

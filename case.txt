@@ -7,4 +7,4 @@ MetalLayers = 2
 #Obstacles = 3
 RoutedShape M1 (50,100) (250,150)
 RoutedShape M2 (475,20) (670,450)
-Obstacle M1 (350,300) (650,750)
+#Obstacle M1 (350,300) (650,750)

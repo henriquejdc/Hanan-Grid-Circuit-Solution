@@ -150,5 +150,5 @@ arq.close()
 
 print layer
 print componentes
-print obst_x
-print obst_y
+#print obst_x
+#print obst_y

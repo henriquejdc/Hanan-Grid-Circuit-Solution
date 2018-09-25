@@ -4,7 +4,6 @@
 #Obstacles
 obst_x = []
 obst_y = []
-dist_obj = 5
 
 #Grafo vazio para prim tamanho 0-5 posições
 prim = []
@@ -39,7 +38,7 @@ def verificar_obstaculo_embaixo(atual_x, atual_y, prox_x, prox_y):
             if atual_x > obst_x[i] and atual_x <= obst_x[i+1]:
                 return 1
     i = i+1
-    
+
 def ser_componente(vert_x, vert_y, vert_x_a, vert_y_a):
     x = 0
     cp= []

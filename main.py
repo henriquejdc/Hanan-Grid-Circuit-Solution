@@ -112,7 +112,7 @@ for linha in texto :
                     ponto_y = pontos_usados1[1].split(")")
                     layer[int(bondary[1])-1][0].append(int(ponto_x[1]))
                     if not int(ponto_x[1]) in termos_x:
-                        termos_x.append(int(ponto_x[1]) )
+                        termos_x.append(int(ponto_x[1]))
                     layer[int(bondary[1])-1][1].append(int(ponto_y[0]))
                     if not int(ponto_y[0]) in termos_y:
                         termos_y.append(int(ponto_y[0]))
@@ -125,8 +125,7 @@ arq.close()
 for bond in layer:
     bond[0].sort()
     bond[1].sort()
-    termos_x = termos_x + bond[0]
-    termos_y = termos_y + bond[1]
+
 termos_x.sort()
 termos_y.sort()
 #print termos_x

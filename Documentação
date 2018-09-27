@@ -21,3 +21,6 @@ Quando se adiciona um ponto novo não conhecido na queue e este é componente ou
 ele tem custo 0
 
 Logo, serão excluidos pontos que nao fazem parte de caminhos entre componentes
+
+
+time python main.py

@@ -16,6 +16,9 @@ com_y = []
 #Distancia dos obstaculos
 dist_obj = 0
 
+termos_x = []
+termos_y = []
+
 arq = open('case.txt', 'r')
 texto = arq.readlines()
 
@@ -72,18 +75,22 @@ for linha in texto :
                     pontos_usados1 = pontos[3].split(",")
                     ponto_x = pontos_usados[0].split("(")
                     ponto_y = pontos_usados[1].split(")")
-                    if not int(ponto_x[1])+dist_obj in  layer[int(bondary[1])-1][0]:
-                        layer[int(bondary[1])-1][0].append(int(ponto_x[1])+dist_obj)
-                    if not int(ponto_y[0])+dist_obj in  layer[int(bondary[1])-1][1]:
-                        layer[int(bondary[1])-1][1].append(int(ponto_y[0])+dist_obj)
+                    layer[int(bondary[1])-1][0].append(int(ponto_x[1])+dist_obj)
+                    if not int(ponto_x[1])+dist_obj in termos_x:
+                        termos_x.append(int(ponto_x[1])+dist_obj)
+                    layer[int(bondary[1])-1][1].append(int(ponto_y[0])+dist_obj)
+                    if not int(ponto_y[0])+dist_obj in termos_y:
+                        termos_y.append(int(ponto_y[0])+dist_obj)
                     obst_x.append(int(ponto_x[1]))
                     obst_y.append(int(ponto_y[0]))
                     ponto_x = pontos_usados1[0].split("(")
                     ponto_y = pontos_usados1[1].split(")")
-                    if not int(ponto_x[1])+dist_obj in  layer[int(bondary[1])-1][0]:
-                        layer[int(bondary[1])-1][0].append(int(ponto_x[1])+dist_obj)
-                    if not int(ponto_y[0])+dist_obj in  layer[int(bondary[1])-1][1]:
-                        layer[int(bondary[1])-1][1].append(int(ponto_y[0])+dist_obj)
+                    layer[int(bondary[1])-1][0].append(int(ponto_x[1])+dist_obj)
+                    if not int(ponto_x[1])+dist_obj in termos_x:
+                        termos_x.append(int(ponto_x[1])+dist_obj)
+                    layer[int(bondary[1])-1][1].append(int(ponto_y[0])+dist_obj)
+                    if not int(ponto_y[0])+dist_obj in termos_y:
+                        termos_y.append(int(ponto_y[0])+dist_obj)
                     obst_x.append(int(ponto_x[1]))
                     obst_y.append(int(ponto_y[0]))
 
@@ -93,33 +100,35 @@ for linha in texto :
                     pontos_usados1 = pontos[3].split(",")
                     ponto_x = pontos_usados[0].split("(")
                     ponto_y = pontos_usados[1].split(")")
-                    if not int(ponto_x[1]) in  layer[int(bondary[1])-1][0]:
-                        layer[int(bondary[1])-1][0].append(int(ponto_x[1]))
-                    if not int(ponto_y[0]) in  layer[int(bondary[1])-1][1]:
-                        layer[int(bondary[1])-1][1].append(int(ponto_y[0]))
+                    layer[int(bondary[1])-1][0].append(int(ponto_x[1]))
+                    if not int(ponto_x[1])in termos_x:
+                        termos_x.append(int(ponto_x[1]))
+                    layer[int(bondary[1])-1][1].append(int(ponto_y[0]))
+                    if not int(ponto_y[0]) in termos_y:
+                        termos_y.append(int(ponto_y[0]))
                     com_x.append(int(ponto_x[1]))
                     com_y.append(int(ponto_y[0]))
                     ponto_x = pontos_usados1[0].split("(")
                     ponto_y = pontos_usados1[1].split(")")
-                    if not int(ponto_x[1]) in  layer[int(bondary[1])-1][0]:
-                        layer[int(bondary[1])-1][0].append(int(ponto_x[1]))
-                    if not int(ponto_y[0]) in  layer[int(bondary[1])-1][1]:
-                        layer[int(bondary[1])-1][1].append(int(ponto_y[0]))
+                    layer[int(bondary[1])-1][0].append(int(ponto_x[1]))
+                    if not int(ponto_x[1]) in termos_x:
+                        termos_x.append(int(ponto_x[1]) )
+                    layer[int(bondary[1])-1][1].append(int(ponto_y[0]))
+                    if not int(ponto_y[0]) in termos_y:
+                        termos_y.append(int(ponto_y[0]))
                     com_x.append(int(ponto_x[1]))
                     com_y.append(int(ponto_y[0]))
 arq.close()
 
 #Ordena vertices
 #####################################
-termos_x = []
-termos_y = []
 for bond in layer:
     bond[0].sort()
     bond[1].sort()
     termos_x = termos_x + bond[0]
     termos_y = termos_y + bond[1]
-termos_x = sorted(set(termos_x))
-termos_y = sorted(set(termos_y))
+termos_x.sort()
+termos_y.sort()
 #print termos_x
 #print termos_y
 

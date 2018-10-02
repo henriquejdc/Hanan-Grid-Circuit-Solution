@@ -19,7 +19,7 @@ dist_obj = 0
 termos_x = []
 termos_y = []
 
-arq = open('case.txt', 'r')
+arq = open('case2.txt', 'r')
 texto = arq.readlines()
 
 for linha in texto :

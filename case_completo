@@ -1,7 +1,7 @@
-ViaCost = 30
+#ViaCost = 30
 Spacing = 8
 Boundary = (0,0) (40000,15000)
-#MetalLayers = 5
+MetalLayers = 5
 #RoutedShapes = 4518
 #RoutedVias = 34
 #Obstacles = 4773

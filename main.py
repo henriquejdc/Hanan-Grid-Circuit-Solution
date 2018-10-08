@@ -1,7 +1,6 @@
 from prim import *
 
-#Layers
-layer = []
+
 #Bord Left
 bondary_coord = []
 
@@ -47,17 +46,6 @@ for linha in texto :
         elif(pontos[0]=="Spacing"): #Which Layers
             dist_obj = int(pontos[2])
 
-        elif(pontos[0]=="MetalLayers"): #Which Layers
-            layers = int(pontos[2])
-
-            for w in range(layers):
-                list = []
-                layer.append(list)
-
-            for w in range(layers):
-                for num in range(2):
-                    lista = []
-                    layer[w].append(lista)
         else:
             if(pontos[0]=="RoutedVia"): #Don't know
                 bondary = pontos[1]
@@ -75,20 +63,16 @@ for linha in texto :
                     pontos_usados1 = pontos[3].split(",")
                     ponto_x = pontos_usados[0].split("(")
                     ponto_y = pontos_usados[1].split(")")
-                    layer[int(bondary[1])-1][0].append(int(ponto_x[1])+dist_obj)
                     if not int(ponto_x[1])+dist_obj in termos_x:
                         termos_x.append(int(ponto_x[1])+dist_obj)
-                    layer[int(bondary[1])-1][1].append(int(ponto_y[0])+dist_obj)
                     if not int(ponto_y[0])+dist_obj in termos_y:
                         termos_y.append(int(ponto_y[0])+dist_obj)
                     obst_x.append(int(ponto_x[1]))
                     obst_y.append(int(ponto_y[0]))
                     ponto_x = pontos_usados1[0].split("(")
                     ponto_y = pontos_usados1[1].split(")")
-                    layer[int(bondary[1])-1][0].append(int(ponto_x[1])+dist_obj)
                     if not int(ponto_x[1])+dist_obj in termos_x:
                         termos_x.append(int(ponto_x[1])+dist_obj)
-                    layer[int(bondary[1])-1][1].append(int(ponto_y[0])+dist_obj)
                     if not int(ponto_y[0])+dist_obj in termos_y:
                         termos_y.append(int(ponto_y[0])+dist_obj)
                     obst_x.append(int(ponto_x[1]))
@@ -100,31 +84,23 @@ for linha in texto :
                     pontos_usados1 = pontos[3].split(",")
                     ponto_x = pontos_usados[0].split("(")
                     ponto_y = pontos_usados[1].split(")")
-                    layer[int(bondary[1])-1][0].append(int(ponto_x[1]))
                     if not int(ponto_x[1])in termos_x:
                         termos_x.append(int(ponto_x[1]))
-                    layer[int(bondary[1])-1][1].append(int(ponto_y[0]))
                     if not int(ponto_y[0]) in termos_y:
                         termos_y.append(int(ponto_y[0]))
                     com_x.append(int(ponto_x[1]))
                     com_y.append(int(ponto_y[0]))
                     ponto_x = pontos_usados1[0].split("(")
                     ponto_y = pontos_usados1[1].split(")")
-                    layer[int(bondary[1])-1][0].append(int(ponto_x[1]))
                     if not int(ponto_x[1]) in termos_x:
                         termos_x.append(int(ponto_x[1]))
-                    layer[int(bondary[1])-1][1].append(int(ponto_y[0]))
                     if not int(ponto_y[0]) in termos_y:
                         termos_y.append(int(ponto_y[0]))
                     com_x.append(int(ponto_x[1]))
                     com_y.append(int(ponto_y[0]))
 arq.close()
 
-#Ordena vertices
-#####################################
-for bond in layer:
-    bond[0].sort()
-    bond[1].sort()
+
 
 termos_x.sort()
 termos_y.sort()
@@ -151,24 +127,25 @@ for numerados in range(6):
 adiciona_resultante(com_x[0],com_y[0],0,-1,-1)
 PRIM(termos_x, termos_y, com_x[0], com_y[0])
 
-arq = open('out.txt', 'w')
-teta = []
+arq = open('out', 'w')
+imprimir = []
 for numeradosss in range(len(prim_resultante[0])):
     list1 = []
-    teta.append(list1)
+    imprimir.append(list1)
 
 for test in prim_resultante:
-    xxt = 0
-    for test2 in test:
-        teta[xxt].append(test2)
-        xxt = xxt + 1
+    imprimir[0].append(test[0])
+    imprimir[1].append(test[1])
+    imprimir[2].append(test[2])
+    imprimir[3].append(test[3])
+    imprimir[4].append(test[4])
+    imprimir[5].append(test[5])
 
 for numeradosss in range(len(prim_resultante[0])):
-    arq.writelines(str(teta[numeradosss])+"\n")
+    arq.writelines(str(imprimir[numeradosss])+"\n")
 
 arq.close()
 
-print layer
 print componentes
 print termos_x
 print termos_y

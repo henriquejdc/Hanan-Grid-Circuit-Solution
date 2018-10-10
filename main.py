@@ -18,7 +18,7 @@ dist_obj = 0
 termos_x = []
 termos_y = []
 
-arq = open('case2.txt', 'r')
+arq = open('case.txt', 'r')
 texto = arq.readlines()
 
 for linha in texto :
@@ -99,8 +99,6 @@ for linha in texto :
                     com_x.append(int(ponto_x[1]))
                     com_y.append(int(ponto_y[0]))
 arq.close()
-
-
 
 termos_x.sort()
 termos_y.sort()

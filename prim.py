@@ -13,7 +13,6 @@ componentes = []
 
 def ser_componente(vert_x, vert_y, vert_x_a, vert_y_a):
     x = 0
-    cp= []
     while x < len(componentes[0]):
         #print vert_y, ">= ", componentes[1][x],"and", vert_y, "<=" ,componentes[1][x+1]
         if vert_y >= componentes[1][x] and vert_y <= componentes[1][x+1]:

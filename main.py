@@ -1,5 +1,7 @@
+import sys
 from prim import *
 
+param = sys.argv
 
 #Bord Left
 bondary_coord = []
@@ -18,7 +20,7 @@ dist_obj = 0
 termos_x = []
 termos_y = []
 
-arq = open('case.txt', 'r')
+arq = open(param[1], 'r')
 texto = arq.readlines()
 
 for linha in texto :

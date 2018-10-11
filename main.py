@@ -153,8 +153,8 @@ div_quads()
 print comp_os
 
 del componentes
-del termos_x
-del termos_y
+del com_x
+del com_y
 
 adiciona_resultante(com_x[0],com_y[0],0,-1,-1)
 PRIM(termos_x, termos_y, com_x[0], com_y[0])

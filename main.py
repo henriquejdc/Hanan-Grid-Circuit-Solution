@@ -146,7 +146,7 @@ for t in range(4):
     comp_ln[t].append(v7)
     comp_ls[t].append(v8)
 
-print comp_os
+#print comp_os
 
 div_quads()
 

@@ -75,4 +75,4 @@ def div_quads():
                 add_quads(3,2,xm,xma,ym,yma)
             if((xm > x_m/4 or xma > x_m/4) and (ym < y_m/2 or yma<y_m/4)): #in ls_3
                 add_quads(3,3,xm,xma,ym,yma)
-    x = x + 2
+        x = x + 2

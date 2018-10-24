@@ -1,7 +1,6 @@
-from prim import *
 import sys
+from prim import *
 
-param = sys.argv
 #Bord Left
 bondary_coord = []
 
@@ -19,8 +18,7 @@ dist_obj = 0
 termos_x = []
 termos_y = []
 
-arq = open(param[1], 'r')
-#arq = open('cases/cases_m/case0.txt', 'r')
+arq = open('caset.txt', 'r')
 texto = arq.readlines()
 
 for linha in texto :
@@ -134,12 +132,10 @@ for numeradosss in range(len(prim_resultante[0])):
     imprimir.append(list1)
 
 for test in prim_resultante:
-    imprimir[0].append(test[0])
-    imprimir[1].append(test[1])
-    imprimir[2].append(test[2])
-    imprimir[3].append(test[3])
-    imprimir[4].append(test[4])
-    imprimir[5].append(test[5])
+    contador_1 = 0
+    for test2 in test:
+        imprimir[contador_1].append(test2)
+        contador_1 = contador_1 + 1
 
 for numeradosss in range(len(prim_resultante[0])):
     arq.writelines(str(imprimir[numeradosss])+"\n")

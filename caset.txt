@@ -1,6 +1,6 @@
 #ViaCost = 30
 Spacing = 8
-Boundary = (0,0) (40000,15000)
+Boundary = (0,0) (40000,40000)
 #MetalLayers = 5
 #RoutedShapes = 4518
 #RoutedVias = 34
@@ -15,7 +15,3 @@ RoutedShape M1 (21907,8117) (22353,8141)
 RoutedShape M1 (11858,5908) (12520,5949)
 RoutedShape M1 (20803,7828) (20845,8008)
 RoutedShape M1 (18790,11354) (18811,11537)
-RoutedShape M1 (10085,9849) (10107,9995)
-RoutedShape M1 (10829,6872) (11345,6903)
-RoutedShape M1 (17481,11746) (17975,11790)
-RoutedShape M1 (20039,1918) (20280,1990)

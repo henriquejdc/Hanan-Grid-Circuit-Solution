@@ -80,6 +80,8 @@ for linha in texto :
                     obst_y.append(int(ponto_y[0]))
 
                 else:
+                    x = [0,0]
+                    y = [0,0]
                     bondary = pontos[1]
                     pontos_usados = pontos[2].split(",")
                     pontos_usados1 = pontos[3].split(",")
@@ -89,6 +91,8 @@ for linha in texto :
                         termos_x.append(int(ponto_x[1]))
                     if not int(ponto_y[0]) in termos_y:
                         termos_y.append(int(ponto_y[0]))
+                    x[0] = int(ponto_x[1])
+                    y[0] = int(ponto_y[0])
                     com_x.append(int(ponto_x[1]))
                     com_y.append(int(ponto_y[0]))
                     ponto_x = pontos_usados1[0].split("(")
@@ -99,12 +103,18 @@ for linha in texto :
                         termos_y.append(int(ponto_y[0]))
                     com_x.append(int(ponto_x[1]))
                     com_y.append(int(ponto_y[0]))
+                    x[1] = int(ponto_x[1])
+                    y[1] = int(ponto_y[0])
+                    #com_x.append(x)
+                    #com_y.append(y)
 arq.close()
 
 termos_x.sort()
 termos_y.sort()
 #print termos_x
 #print termos_y
+print com_x
+print com_y
 
 for numerados in range(6):
     list1 = []

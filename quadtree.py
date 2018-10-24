@@ -1,12 +1,42 @@
 from prim import *
 
 #Bord Left
-bondary_coord = []
-componentes = []
+
 comp_on =[] #componente oeste norte
 comp_os =[] #componente oeste sul
 comp_ln =[] #componente leste norte
 comp_ls =[] #componente leste sul
+
+def init_quad():
+    for cont in range(4):
+        v1 = []
+        v2 = []
+        v3 = []
+        v4 = []
+        comp_on.append(v1)
+        comp_os.append(v2)
+        comp_ln.append(v3)
+        comp_ls.append(v4)
+
+    for t in range(4):
+        v1 = []
+        v2 = []
+        v3 = []
+        v4 = []
+        v5 = []
+        v6 = []
+        v7 = []
+        v8 = []
+        comp_on[t].append(v1)
+        comp_os[t].append(v2)
+        comp_ln[t].append(v3)
+        comp_ls[t].append(v4)
+        comp_on[t].append(v5)
+        comp_os[t].append(v6)
+        comp_ln[t].append(v7)
+        comp_ls[t].append(v8)
+
+    #print comp_os
 
 def add_quads(n_q,nn_q,xm,xma,ym,yma): #numero do quad, numero do sub quad
     if(n_q==0):
@@ -30,7 +60,7 @@ def add_quads(n_q,nn_q,xm,xma,ym,yma): #numero do quad, numero do sub quad
         comp_ls[nn_q][0].append(xma)
         comp_ls[nn_q][1].append(yma)
 
-def div_quads():
+def div_quads(componentes,bondary_coord):
     x_m = bondary_coord[2]
     y_m = bondary_coord[3]
     x = 0

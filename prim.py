@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from quadtree import *
-
 # FALTA ARRUMAR ARRASTAS/VALORES, VERIFICAÇÃO COMPONENTES E OBSTACULOS
 #Obstacles
 obst_x = []
@@ -11,6 +9,7 @@ obst_y = []
 prim = []
 prim_resultante = []
 
+componentes = []
 
 def ser_componente(vert_x, vert_y, vert_x_a, vert_y_a):
     x = 0

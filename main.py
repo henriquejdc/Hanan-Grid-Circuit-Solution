@@ -1,8 +1,9 @@
-import sys
 from prim import *
-from quadtree import *
+import sys
 
 param = sys.argv
+#Bord Left
+bondary_coord = []
 
 #Vias
 vias_bondary = []
@@ -19,6 +20,7 @@ termos_x = []
 termos_y = []
 
 arq = open(param[1], 'r')
+#arq = open('cases/cases_m/case0.txt', 'r')
 texto = arq.readlines()
 
 for linha in texto :
@@ -105,56 +107,22 @@ termos_y.sort()
 #print termos_x
 #print termos_y
 
-for cont in range(6):
+for numerados in range(6):
     list1 = []
     prim.append(list1)
-    list2 = []
-    prim_resultante.append(list2)
 
-for cont in range(2):
+for numerados in range(2):
     list = []
     componentes.append(list)
 
 componentes[0] = com_x
 componentes[1] = com_y
 
-for cont in range(4):
-    v1 = []
-    v2 = []
-    v3 = []
-    v4 = []
-    comp_on.append(v1)
-    comp_os.append(v2)
-    comp_ln.append(v3)
-    comp_ls.append(v4)
 
-for t in range(4):
-    v1 = []
-    v2 = []
-    v3 = []
-    v4 = []
-    v5 = []
-    v6 = []
-    v7 = []
-    v8 = []
-    comp_on[t].append(v1)
-    comp_os[t].append(v2)
-    comp_ln[t].append(v3)
-    comp_ls[t].append(v4)
-    comp_on[t].append(v5)
-    comp_os[t].append(v6)
-    comp_ln[t].append(v7)
-    comp_ls[t].append(v8)
+for numerados in range(6):
+    list2 = []
+    prim_resultante.append(list2)
 
-#print comp_os
-
-div_quads()
-
-print comp_os
-
-del componentes
-del com_x
-del com_y
 
 adiciona_resultante(com_x[0],com_y[0],0,-1,-1)
 PRIM(termos_x, termos_y, com_x[0], com_y[0])
@@ -177,3 +145,9 @@ for numeradosss in range(len(prim_resultante[0])):
     arq.writelines(str(imprimir[numeradosss])+"\n")
 
 arq.close()
+
+#print componentes
+#print termos_x
+#print termos_y
+#print obst_x
+#print obst_y

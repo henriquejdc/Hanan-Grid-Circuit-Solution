@@ -18,6 +18,7 @@ dist_obj = 0
 termos_x = []
 termos_y = []
 
+#arq = open(param[1], 'r')
 arq = open('caset.txt', 'r')
 texto = arq.readlines()
 

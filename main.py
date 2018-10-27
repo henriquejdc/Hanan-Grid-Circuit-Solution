@@ -127,6 +127,10 @@ for numerados in range(2):
 componentes[0] = com_x
 componentes[1] = com_y
 
+random.shuffle(com_x)
+random.shuffle(com_y)
+
+
 
 for numerados in range(6):
     list2 = []

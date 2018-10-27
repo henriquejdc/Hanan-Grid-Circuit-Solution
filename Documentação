@@ -30,3 +30,4 @@ time python main.py
 from random import shuffle
 Tornar os pontos pares como lista = [[3,4],[5,6]] e utilizar o shuffle
 random.shuffle(lista)
+Fazer a arvore por par/impar e guardar o max X e max Y

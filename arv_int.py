@@ -12,26 +12,26 @@ def consult_arv(raiz, min, max):
 
     if(raiz[0] == 0):
         if(min[1]<raiz[1][1]):
-            print('y,esq')
+            #print('y,esq')
             if not raiz[4]:
                 raiz[4] = new_node(1,min,max)
             else:
                 consult_arv(raiz[4],min, max)
         else:
-            print('y,dir')
+            #print('y,dir')
             if not raiz[5]:
                 raiz[5] = new_node(1,min,max)
             else:
                 consult_arv(raiz[5],min, max)
     else:
         if(min[0]<raiz[1][0]):
-            print('x,esq')
+            #print('x,esq')
             if not raiz[4]:
                 raiz[4] = new_node(0,min,max)
             else:
                 consult_arv(raiz[4],min, max)
         else:
-            print('x,dir')
+            #print('x,dir')
             if not raiz[5]:
                 raiz[5] = new_node(0,min,max)
             else:
@@ -49,3 +49,28 @@ def arv_int(componentes):
             consult_arv(raiz,comp[0][x],comp[1][x])
         x = x + 1
     return raiz
+
+def consulta(raiz,px,py):
+
+    if((raiz[1][0]<=px and raiz[2][0]>=px) and (raiz[1][0]<=py and raiz[2][0]>=py)):
+        return 1
+
+    if(raiz[0]==0):
+        esq = raiz[4]
+        dirs = raiz[5]
+        if(esq != []):
+            if(px<=esq[3][0] and py<=esq[3][0]):
+                consulta(esq,px,py)
+        elif(dirs !=[]):
+            if(px<=dirs[3][0] and py<=dirs[3][0]):
+                consulta(dir,px,py)
+        else:
+            return 0
+    else:
+        esq = raiz[4]
+        dirs = raiz[5]
+        if(px<=esq[3][0] and py<=esq[3][0]):
+            consulta(esq,px,py)
+        elif(px<=dirs[3][0] and py<=dirs[3][0]):
+
+    return 0

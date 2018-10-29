@@ -1,5 +1,6 @@
 import sys
 from prim import *
+from random import shuffle
 
 #Bord Left
 bondary_coord = []
@@ -29,7 +30,6 @@ for linha in texto :
     #Ignore Comments
     if(comentado[0] != "#"):
         if(pontos[0]=="Boundary"): #bondary
-            #print(pontos)
             board_left = pontos[2]
             board_right = pontos[3]
 
@@ -111,10 +111,6 @@ arq.close()
 
 termos_x.sort()
 termos_y.sort()
-#print termos_x
-#print termos_y
-print com_x
-print com_y
 
 for numerados in range(6):
     list1 = []
@@ -124,13 +120,11 @@ for numerados in range(2):
     list = []
     componentes.append(list)
 
+shuffle(com_x)
+shuffle(com_y)
+
 componentes[0] = com_x
 componentes[1] = com_y
-
-random.shuffle(com_x)
-random.shuffle(com_y)
-
-
 
 for numerados in range(6):
     list2 = []
@@ -156,9 +150,3 @@ for numeradosss in range(len(prim_resultante[0])):
     arq.writelines(str(imprimir[numeradosss])+"\n")
 
 arq.close()
-
-#print componentes
-#print termos_x
-#print termos_y
-#print obst_x
-#print obst_y

@@ -1,7 +1,5 @@
 import sys
 from prim import *
-from random import shuffle
-from arv_int import *
 #Bord Left
 bondary_coord = []
 
@@ -12,8 +10,7 @@ vias_y = []
 #Components
 com_x = []
 com_y = []
-com_x1 = []
-com_y1 = []
+
 #Distancia dos obstaculos
 dist_obj = 0
 
@@ -81,8 +78,6 @@ for linha in texto :
                     obst_y.append(int(ponto_y[0]))
 
                 else:
-                    x = [0,0]
-                    y = [0,0]
                     bondary = pontos[1]
                     pontos_usados = pontos[2].split(",")
                     pontos_usados1 = pontos[3].split(",")
@@ -92,8 +87,6 @@ for linha in texto :
                         termos_x.append(int(ponto_x[1]))
                     if not int(ponto_y[0]) in termos_y:
                         termos_y.append(int(ponto_y[0]))
-                    x[0] = int(ponto_x[1])
-                    y[0] = int(ponto_y[0])
                     com_x.append(int(ponto_x[1]))
                     com_y.append(int(ponto_y[0]))
                     ponto_x = pontos_usados1[0].split("(")
@@ -104,10 +97,6 @@ for linha in texto :
                         termos_y.append(int(ponto_y[0]))
                     com_x.append(int(ponto_x[1]))
                     com_y.append(int(ponto_y[0]))
-                    x[1] = int(ponto_x[1])
-                    y[1] = int(ponto_y[0])
-                    com = [x,y]
-                    com_x1.append(com)
 arq.close()
 
 termos_x.sort()
@@ -121,14 +110,8 @@ for numerados in range(2):
     list = []
     componentes.append(list)
 
-shuffle(com_x1)
-
 componentes[0] = com_x
 componentes[1] = com_y
-
-raiz = arv_int(com_x1)
-print raiz
-
 
 for numerados in range(6):
     list2 = []
@@ -136,7 +119,7 @@ for numerados in range(6):
 
 
 adiciona_resultante(com_x[0],com_y[0],0,-1,-1)
-PRIM(termos_x, termos_y, com_x[0], com_y[0],raiz)
+PRIM(termos_x, termos_y, com_x[0], com_y[0])
 
 arq = open('out', 'w')
 imprimir = []

@@ -41,25 +41,24 @@ def consult_arv(raiz, x, y):
 def arv_int(componentes):
     comp = componentes
     x = 0
-    while x < len(componentes[0]):
+    while x < len(componentes):
         #print(x)
         if x == 0:
-            raiz = new_node(0,comp[0][x],comp[1][x]) #tipo pai, x, y, maximos xy e esqerda direita
+            raiz = new_node(0,comp[x][0],comp[x][1]) #tipo pai, x, y, maximos xy e esqerda direita
         else:
             #print (comp[0][x],comp[1][x])
-            consult_arv(raiz,comp[0][x],comp[1][x])
+            consult_arv(raiz,comp[x][0],comp[x][1])
         x = x + 1
     return raiz
 
 def consulta(raiz,px,py):
     x = raiz
-
     while((x != []) and not ((x[1][0]<=px and x[1][1]>=px) and (x[2][0]<=py and x[2][1]>=py))):
         if(x[4]!=[] and (x[3][0]>=px and x[3][1]>=py)):
             x = x[4]
         else:
             x = x[5]
-            
+
     if(x != []):
         return 1;
     else:

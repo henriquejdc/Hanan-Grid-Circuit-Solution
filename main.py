@@ -1,7 +1,7 @@
 import sys
 from prim import *
 from random import shuffle
-
+from arv_int import *
 #Bord Left
 bondary_coord = []
 
@@ -106,8 +106,8 @@ for linha in texto :
                     com_y.append(int(ponto_y[0]))
                     x[1] = int(ponto_x[1])
                     y[1] = int(ponto_y[0])
-                    com_x1.append(x)
-                    com_y1.append(y)
+                    com = [x,y]
+                    com_x1.append(com)
 arq.close()
 
 termos_x.sort()
@@ -122,11 +122,12 @@ for numerados in range(2):
     componentes.append(list)
 
 shuffle(com_x1)
-shuffle(com_y1)
 
 componentes[0] = com_x
 componentes[1] = com_y
 
+raiz = arv_int(com_x1)
+print raiz
 
 
 for numerados in range(6):
@@ -135,7 +136,7 @@ for numerados in range(6):
 
 
 adiciona_resultante(com_x[0],com_y[0],0,-1,-1)
-PRIM(termos_x, termos_y, com_x[0], com_y[0])
+PRIM(termos_x, termos_y, com_x[0], com_y[0],raiz)
 
 arq = open('out', 'w')
 imprimir = []

@@ -52,7 +52,7 @@ def arv_int(componentes):
     return raiz
 
 def consulta(raiz,px,py):
-    x = raiz
+    x = raiz 
     while((x != []) and not ((x[1][0]<=px and x[1][1]>=px) and (x[2][0]<=py and x[2][1]>=py))):
         if(x[4]!=[] and (x[3][0]>=px and x[3][1]>=py)):
             x = x[4]

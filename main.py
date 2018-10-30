@@ -12,7 +12,8 @@ vias_y = []
 #Components
 com_x = []
 com_y = []
-
+com_x1 = []
+com_y1 = []
 #Distancia dos obstaculos
 dist_obj = 0
 
@@ -105,8 +106,8 @@ for linha in texto :
                     com_y.append(int(ponto_y[0]))
                     x[1] = int(ponto_x[1])
                     y[1] = int(ponto_y[0])
-                    #com_x.append(x)
-                    #com_y.append(y)
+                    com_x1.append(x)
+                    com_y1.append(y)
 arq.close()
 
 termos_x.sort()
@@ -120,11 +121,13 @@ for numerados in range(2):
     list = []
     componentes.append(list)
 
-shuffle(com_x)
-shuffle(com_y)
+shuffle(com_x1)
+shuffle(com_y1)
 
 componentes[0] = com_x
 componentes[1] = com_y
+
+
 
 for numerados in range(6):
     list2 = []

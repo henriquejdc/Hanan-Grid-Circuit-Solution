@@ -21,7 +21,7 @@ termos_x = []
 termos_y = []
 
 #arq = open(param[1], 'r')
-arq = open('caset.txt', 'r')
+arq = open('cases/case0.txt', 'r')
 texto = arq.readlines()
 
 for linha in texto :
@@ -127,8 +127,7 @@ componentes[0] = com_x
 componentes[1] = com_y
 
 raiz = arv_int(com_x1)
-print raiz
-
+#print( raiz )
 
 for numerados in range(6):
     list2 = []

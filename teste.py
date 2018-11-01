@@ -12,7 +12,7 @@ print('\n\n')
 #print (shuffle(num), shuffle(num1))
 #nums = [num, num1]
 raiz = num
-print_a(raiz)
+print(raiz)
 #print raiz
 print(consulta(raiz,22231,2153))
 #del num

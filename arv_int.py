@@ -1,8 +1,8 @@
 def new_node(nivel,x, y):
     maximo = [x[1],y[1]]
     minimo = [x[0],y[0]]
-    list = [nivel, x,  y, maximo, [], []]
-    return list
+    lista = [nivel, x,  y, minimo, maximo, [], []]
+    return lista
 
 def consult_arv(raiz, x, y):
     if(x[1]>raiz[4][0]):
@@ -10,10 +10,10 @@ def consult_arv(raiz, x, y):
     if(y[1]>raiz[4][1]):
         raiz[4][1] = y[1]
 
-    if(x[1]<raiz[3][0]):
-        raiz[3][0] = x[1]
-    if(y[1]<raiz[3][1]):
-        raiz[3][1] = y[1]
+    if(x[0]<raiz[3][0]):
+        raiz[3][0] = x[0]
+    if(y[0]<raiz[3][1]):
+        raiz[3][1] = y[0]
 
     if(raiz[0] == 0):
         if(y[0]<=raiz[2][0]):
@@ -25,7 +25,7 @@ def consult_arv(raiz, x, y):
             if not raiz[6]:
                 raiz[6] = new_node(1,x,y)
             else:
-                consult_arv(raiz[5],x, y)
+                consult_arv(raiz[6],x, y)
     else:
         if(x[0]<=raiz[1][0]):
             if not raiz[5]:
@@ -54,14 +54,11 @@ def consulta(raiz,px,py):
     x = raiz
 
     while((x != []) and not ((x[1][0]<=px and x[1][1]>=px) and (x[2][0]<=py and x[2][1]>=py))):
-        esquerda = x[4]
-        print(esquerda[1][0],esquerda[3][0])
-        if(x[4]!=[] and (esquerda[4][0]>=px and esquerda[4][1]>=py)and(esquerda[3][0]<=px and esquerda[3][1]<=py)):
-            print("esq")
-            x = x[4]
-        else:
-            print("dir")
+        esquerda = x[5]
+        if(x[5]!=[] and (esquerda[4][0]>=px and esquerda[4][1]>=py) and (esquerda[3][0]<=px and esquerda[3][1]<=py)):
             x = x[5]
+        else:
+            x = x[6]
 
     if(x != []):
         return 1;
@@ -71,9 +68,7 @@ def consulta(raiz,px,py):
 def print_a(raiz):
     if(raiz!=[]):
         print((raiz[1],raiz[2],raiz[3]))
-        if(raiz[4]!=[]):
-            print("esquerda ",raiz[1])
-            print_a(raiz[4])
         if(raiz[5]!=[]):
-            print("direita ",raiz[1])
             print_a(raiz[5])
+        if(raiz[6]!=[]):
+            print_a(raiz[6])

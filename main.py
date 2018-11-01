@@ -10,10 +10,7 @@ vias_bondary = []
 vias_x = []
 vias_y = []
 #Components
-com_x = []
-com_y = []
 com_x1 = []
-com_y1 = []
 #Distancia dos obstaculos
 dist_obj = 0
 
@@ -21,7 +18,7 @@ termos_x = []
 termos_y = []
 
 #arq = open(param[1], 'r')
-arq = open('cases/case0.txt', 'r')
+arq = open('caset.txt', 'r')
 texto = arq.readlines()
 
 for linha in texto :
@@ -33,7 +30,6 @@ for linha in texto :
         if(pontos[0]=="Boundary"): #bondary
             board_left = pontos[2]
             board_right = pontos[3]
-
             pontos_usado = board_left.split(")")
             pontos_usado1 = pontos_usado[0].split("(")
             pontos_usado_left = pontos_usado1[1].split(",")
@@ -47,7 +43,6 @@ for linha in texto :
 
         elif(pontos[0]=="Spacing"): #Which Layers
             dist_obj = int(pontos[2])
-
         else:
             if(pontos[0]=="RoutedVia"): #Don't know
                 bondary = pontos[1]
@@ -58,7 +53,6 @@ for linha in texto :
                 vias_x.append(int(ponto_x[1]))
                 vias_x.append(int(ponto_y[0]))
             else:#Shapes and Obstacle
-
                 if(pontos[0]=="Obstacle"):
                     bondary = pontos[1]
                     pontos_usados = pontos[2].split(",")
@@ -94,16 +88,12 @@ for linha in texto :
                         termos_y.append(int(ponto_y[0]))
                     x[0] = int(ponto_x[1])
                     y[0] = int(ponto_y[0])
-                    com_x.append(int(ponto_x[1]))
-                    com_y.append(int(ponto_y[0]))
                     ponto_x = pontos_usados1[0].split("(")
                     ponto_y = pontos_usados1[1].split(")")
                     if not int(ponto_x[1]) in termos_x:
                         termos_x.append(int(ponto_x[1]))
                     if not int(ponto_y[0]) in termos_y:
                         termos_y.append(int(ponto_y[0]))
-                    com_x.append(int(ponto_x[1]))
-                    com_y.append(int(ponto_y[0]))
                     x[1] = int(ponto_x[1])
                     y[1] = int(ponto_y[0])
                     com = [x,y]
@@ -117,25 +107,20 @@ for numerados in range(6):
     list1 = []
     prim.append(list1)
 
-for numerados in range(2):
-    list = []
-    componentes.append(list)
+com_x = com_x1[0][0][0]
+com_y = com_x1[0][1][0]
 
 shuffle(com_x1)
 
-componentes[0] = com_x
-componentes[1] = com_y
-
 raiz = arv_int(com_x1)
-#print( raiz )
 
 for numerados in range(6):
     list2 = []
     prim_resultante.append(list2)
 
 
-adiciona_resultante(com_x[0],com_y[0],0,-1,-1)
-PRIM(termos_x, termos_y, com_x[0], com_y[0],raiz)
+adiciona_resultante(com_x,com_y,0,-1,-1)
+PRIM(termos_x, termos_y, com_x, com_y,raiz)
 
 arq = open('out', 'w')
 imprimir = []

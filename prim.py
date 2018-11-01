@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from arv_int import consulta
-# FALTA ARRUMAR ARRASTAS/VALORES, VERIFICAÇÃO COMPONENTES E OBSTACULOS
 #Obstacles
 obst_x = []
 obst_y = []
@@ -9,23 +8,6 @@ obst_y = []
 #Grafo vazio para prim tamanho 0-5 posições
 prim = []
 prim_resultante = []
-
-componentes = []
-
-def ser_componente(vert_x, vert_y, vert_x_a, vert_y_a):
-    x = 0
-    while x < len(componentes[0]):
-        #print vert_y, ">= ", componentes[1][x],"and", vert_y, "<=" ,componentes[1][x+1]
-        if vert_y >= componentes[1][x] and vert_y <= componentes[1][x+1]:
-            #print "1", vert_y_a,">=", componentes[1][x] ,"and", vert_y_a ,"<=" ,componentes[1][x+1]
-            if vert_y_a >= componentes[1][x]  and vert_y_a <= componentes[1][x+1]:
-        #print "2",componentes[0][x], ">= ",vert_x, "and", vert_x, "<=" ,componentes[0][x+1]
-                if vert_x >= componentes[0][x] and vert_x <= componentes[0][x+1]:
-            #print "3",componentes[0][x] ,">=", vert_x_a ,"and", vert_x_a ,"<=" ,componentes[0][x+1]
-                    if  vert_x_a >= componentes[0][x]and vert_x_a <= componentes[0][x+1] :
-                        return 1
-        x = x + 2
-    return 0
 
 def codigo_id(atual_x,atual_y):
     codigo = str(atual_x)+ str(atual_y)
@@ -147,7 +129,6 @@ def adiciona_resultante(atual_x, atual_y, custo,pai_x,pai_y):
 def PRIM(graph_cp_x, graph_cp_y, vert_x, vert_y, raiz):
     menor_custo = 0
     pos_menor = 0
-    #FAZER A VERIFICAÇÃO DE OBSTACULO ENTRE OS PONTOS OU PONTO NO OBSTACULO
     adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y, raiz)
 
     while (len(prim[0])!=0):

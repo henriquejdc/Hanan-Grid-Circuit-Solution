@@ -1,4 +1,3 @@
-#fazer y e x dos nodos
 def new_node(nivel,x, y):
     maximo = [x[1],y[1]]
     list = [nivel, x,  y, maximo, [], []]
@@ -12,7 +11,6 @@ def consult_arv(raiz, x, y):
 
     if(raiz[0] == 0):
         if(y[0]<raiz[2][0]):
-            #print('y,esq')
             if not raiz[4]:
                 raiz[4] = new_node(1,x,y)
             else:
@@ -25,13 +23,11 @@ def consult_arv(raiz, x, y):
                 consult_arv(raiz[5],x, y)
     else:
         if(x[0]<raiz[1][0]):
-            #print('x,esq')
             if not raiz[4]:
                 raiz[4] = new_node(0,x,y)
             else:
                 consult_arv(raiz[4],x, y)
         else:
-            #print('x,dir')
             if not raiz[5]:
                 raiz[5] = new_node(0,x,y)
             else:
@@ -42,11 +38,9 @@ def arv_int(componentes):
     comp = componentes
     x = 0
     while x < len(componentes):
-        #print(x)
         if x == 0:
             raiz = new_node(0,comp[x][0],comp[x][1]) #tipo pai, x, y, maximos xy e esqerda direita
         else:
-            #print (comp[0][x],comp[1][x])
             consult_arv(raiz,comp[x][0],comp[x][1])
         x = x + 1
     return raiz
@@ -60,8 +54,6 @@ def consulta(raiz,px,py):
             x = x[4]
         else:
             x = x[5]
-    #if(x != []):
-        #print(x[1][0],'<=',px, 'and', x[1][1],'>=',px, 'and' ,x[2][0],'<=',py ,'and', x[2][1],'>=',py)
     if(x != []):
         return 1;
     else:

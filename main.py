@@ -124,7 +124,7 @@ for numerados in range(6):
 adiciona_resultante(com_x,com_y,0,-1,-1)
 PRIM(termos_x, termos_y, com_x, com_y,raiz)
 
-arq = open('out', 'w')
+arq = open(sys.argv[2], 'w')
 
 imprimir = []
 for numeradosss in range(len(prim_resultante[0])):

@@ -18,7 +18,7 @@ termos_x = []
 termos_y = []
 
 #arq = open(param[1], 'r')
-arq = open('caset.txt', 'r')
+arq = open(sys.argv[1], 'r')
 texto = arq.readlines()
 
 for linha in texto :
@@ -121,7 +121,7 @@ for numerados in range(6):
 adiciona_resultante(com_x[0],com_y[0],0,-1,-1)
 PRIM(termos_x, termos_y, com_x[0], com_y[0])
 
-arq = open('out', 'w')
+arq = open(sys.argv[2], 'w')
 imprimir = []
 for numeradosss in range(len(prim_resultante[0])):
     list1 = []

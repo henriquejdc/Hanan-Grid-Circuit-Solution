@@ -3,6 +3,8 @@ from prim import *
 from random import shuffle
 from arv_int import *
 #Bord Left
+
+print (sys.argv)
 bondary_coord = []
 
 #Vias
@@ -17,8 +19,8 @@ dist_obj = 0
 termos_x = []
 termos_y = []
 
-#arq = open(param[1], 'r')
-arq = open('caset.txt', 'r')
+arq = open(sys.argv[1], 'r')
+#arq = open('caset.txt', 'r')
 texto = arq.readlines()
 
 for linha in texto :
@@ -123,6 +125,7 @@ adiciona_resultante(com_x,com_y,0,-1,-1)
 PRIM(termos_x, termos_y, com_x, com_y,raiz)
 
 arq = open('out', 'w')
+
 imprimir = []
 for numeradosss in range(len(prim_resultante[0])):
     list1 = []

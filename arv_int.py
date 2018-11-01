@@ -16,7 +16,6 @@ def consult_arv(raiz, x, y):
             else:
                 consult_arv(raiz[4],x, y)
         else:
-            #print('y,dir')
             if not raiz[5]:
                 raiz[5] = new_node(1,x,y)
             else:

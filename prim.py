@@ -13,13 +13,13 @@ def codigo_id(atual_x,atual_y):
     codigo = str(atual_x)+ str(atual_y)
     return codigo
 
-def adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y,raiz):
+def adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y,raiz, cs):
     pos_x = graph_cp_x.index(vert_x)
     pos_y = graph_cp_y.index(vert_y)
     if(pos_x-1 > -1): #COLOCAR CONDIÇÃO Q SE EXISTE NA QUEUE, TROCAR PELO MENOR
             if (codigo_id(graph_cp_x[pos_x-1],vert_y) in prim[5]):
                 posicao = prim[5].index(codigo_id(graph_cp_x[pos_x-1],vert_y))
-                if consulta(raiz,vert_x,vert_y) and consulta(raiz,graph_cp_x[pos_x-1], vert_y):
+                if consulta(raiz,graph_cp_x[pos_x-1], vert_y) and cs:
                     prim[2][posicao]= 0
                     prim[3][posicao]=  vert_x
                     prim[4][posicao]=  vert_y
@@ -31,7 +31,7 @@ def adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y,raiz):
                 #condição de obstaculo
                 prim[0].append(graph_cp_x[pos_x-1])
                 prim[1].append(vert_y)
-                if consulta(raiz,vert_x,vert_y) and consulta(raiz,graph_cp_x[pos_x-1], vert_y):
+                if consulta(raiz,graph_cp_x[pos_x-1], vert_y)and cs:
                     custo_aresta = 0
                 else:
                     custo_aresta =  vert_x - graph_cp_x[pos_x-1]
@@ -46,7 +46,7 @@ def adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y,raiz):
     if(pos_x+1 < auxiliar):
         if (codigo_id(graph_cp_x[pos_x+1],vert_y) in prim[5]):
             posicao = prim[5].index(codigo_id(graph_cp_x[pos_x+1],vert_y))
-            if consulta(raiz,vert_x,vert_y) and consulta(raiz,graph_cp_x[pos_x+1], vert_y):
+            if consulta(raiz,graph_cp_x[pos_x+1], vert_y)and cs:
                 prim[2][posicao]= 0
                 prim[3][posicao]=  vert_x
                 prim[4][posicao]=  vert_y
@@ -58,7 +58,7 @@ def adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y,raiz):
         #condição de obstaculo
             prim[0].append(graph_cp_x[pos_x+1])
             prim[1].append(vert_y)
-            if consulta(raiz,vert_x,vert_y) and consulta(raiz,graph_cp_x[pos_x+1], vert_y):
+            if consulta(raiz,graph_cp_x[pos_x+1], vert_y)and cs:
                 custo_aresta = 0
             else:
                 custo_aresta =  graph_cp_x[pos_x+1] - vert_x
@@ -70,7 +70,7 @@ def adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y,raiz):
     if(pos_y-1 > -1):
         if (codigo_id(vert_x,graph_cp_y[pos_y-1]) in prim[5]):
             posicao = prim[5].index(codigo_id(vert_x,graph_cp_y[pos_y-1]))
-            if consulta(raiz,vert_x,vert_y) and consulta(raiz,vert_x, graph_cp_y[pos_y-1]):
+            if consulta(raiz,vert_x, graph_cp_y[pos_y-1])and cs:
                 prim[2][posicao]= 0
                 prim[3][posicao]=  vert_x
                 prim[4][posicao]=  vert_y
@@ -82,7 +82,7 @@ def adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y,raiz):
         #condição de obstaculo
             prim[0].append(vert_x)
             prim[1].append(graph_cp_y[pos_y-1])
-            if consulta(raiz,vert_x,vert_y) and consulta(raiz,vert_x, graph_cp_y[pos_y-1]):
+            if consulta(raiz,vert_x, graph_cp_y[pos_y-1])and cs:
                 custo_aresta = 0
             else:
                 custo_aresta = vert_y - graph_cp_y[pos_y-1]
@@ -95,7 +95,7 @@ def adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y,raiz):
     if(pos_y+1 < auxiliar):
         if (codigo_id(vert_x,graph_cp_y[pos_y+1]) in prim[5]):
             posicao = prim[5].index(codigo_id(vert_x,graph_cp_y[pos_y+1]))
-            if consulta(raiz,vert_x,vert_y) and consulta(raiz,vert_x, graph_cp_y[pos_y+1]):
+            if consulta(raiz,vert_x, graph_cp_y[pos_y+1])and cs:
                 prim[2][posicao]= 0
                 prim[3][posicao]=  vert_x
                 prim[4][posicao]=  vert_y
@@ -107,7 +107,7 @@ def adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y,raiz):
         #condição de obstaculo
             prim[0].append(vert_x)
             prim[1].append(graph_cp_y[pos_y+1])
-            if consulta(raiz,vert_x,vert_y) and consulta(raiz,vert_x, graph_cp_y[pos_y+1]):
+            if consulta(raiz,vert_x, graph_cp_y[pos_y+1])and cs:
                 custo_aresta = 0
             else:
                 custo_aresta = graph_cp_y[pos_y+1] - vert_y
@@ -129,7 +129,7 @@ def adiciona_resultante(atual_x, atual_y, custo,pai_x,pai_y):
 def PRIM(graph_cp_x, graph_cp_y, vert_x, vert_y, raiz):
     menor_custo = 0
     pos_menor = 0
-    adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y, raiz)
+    adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y, raiz,consulta(raiz,vert_x,vert_y))
 
     while (len(prim[0])!=0):
         menor_custo = min(prim[2])
@@ -141,7 +141,7 @@ def PRIM(graph_cp_x, graph_cp_y, vert_x, vert_y, raiz):
             adiciona_resultante(prim[0][pos_menor],prim[1][pos_menor],prim[2][pos_menor],prim[3][pos_menor],prim[4][pos_menor])
             vert_x = prim[0][pos_menor]
             vert_y = prim[1][pos_menor]
-            adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y, raiz)
+            adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y, raiz, consulta(raiz,vert_x,vert_y))
             for i in range(6):
                 del prim[i][pos_menor]
         else:

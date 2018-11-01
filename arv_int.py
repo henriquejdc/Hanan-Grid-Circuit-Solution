@@ -53,6 +53,7 @@ def consulta(raiz,px,py):
             x = x[4]
         else:
             x = x[5]
+
     if(x != []):
         return 1;
     else:

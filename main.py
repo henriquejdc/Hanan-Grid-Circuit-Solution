@@ -113,8 +113,10 @@ com_x = com_x1[0][0][0]
 com_y = com_x1[0][1][0]
 
 shuffle(com_x1)
-
+#print(com_x1)
 raiz = arv_int(com_x1)
+#print('\n')
+#print_a(raiz)
 
 for numerados in range(6):
     list2 = []

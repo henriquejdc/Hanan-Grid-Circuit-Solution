@@ -66,7 +66,8 @@ def consulta1(raiz,px,py):
 
 def consulta(raiz,px,py,px_a,py_a):
     x = raiz
-    while((x != []) and not (((x[1][0]<=px and x[1][1]>=px) and (x[2][0]<=py and x[2][1]>=py)) and ((x[1][0]<=px_a and x[1][1]>=px_a) and (x[2][0]<=py_a and x[2][1]>=py_a)))):
+    while((x != []) and not (((x[1][0]<=px and x[1][1]>=px) and (x[2][0]<=py and x[2][1]>=py))
+    and ((x[1][0]<=px_a and x[1][1]>=px_a) and (x[2][0]<=py_a and x[2][1]>=py_a)))):
         esquerda = x[5]
         if(x[5]!=[] and (esquerda[4][0]>=px and esquerda[4][1]>=py) and (esquerda[3][0]<=px and esquerda[3][1]<=py)):
             x = x[5]

@@ -117,6 +117,7 @@ shuffle(com_x1)
 raiz = arv_int(com_x1)
 #print('\n')
 #print_a(raiz)
+del com_x1
 
 for numerados in range(6):
     list2 = []
@@ -126,20 +127,20 @@ for numerados in range(6):
 adiciona_resultante(com_x,com_y,0,-1,-1)
 PRIM(termos_x, termos_y, com_x, com_y,raiz)
 
-arq = open(sys.argv[2], 'w')
-
-imprimir = []
-for numeradosss in range(len(prim_resultante[0])):
-    list1 = []
-    imprimir.append(list1)
-
-for test in prim_resultante:
-    contador_1 = 0
-    for test2 in test:
-        imprimir[contador_1].append(test2)
-        contador_1 = contador_1 + 1
-
-for numeradosss in range(len(prim_resultante[0])):
-    arq.writelines(str(imprimir[numeradosss])+"\n")
-
-arq.close()
+# arq = open(sys.argv[2], 'w')
+#
+# imprimir = []
+# for numeradosss in range(len(prim_resultante[0])):
+#     list1 = []
+#     imprimir.append(list1)
+#
+# for test in prim_resultante:
+#     contador_1 = 0
+#     for test2 in test:
+#         imprimir[contador_1].append(test2)
+#         contador_1 = contador_1 + 1
+#
+# for numeradosss in range(len(prim_resultante[0])):
+#     arq.writelines(str(imprimir[numeradosss])+"\n")
+#
+# arq.close()

@@ -1,18 +1,18 @@
-	Command being timed: "python main.py cases/case2.txt out/out2"
-	User time (seconds): 3085.44
-	System time (seconds): 0.52
+	Command being timed: "pypy main.py cases/case2.txt out/out2"
+	User time (seconds): 458.01
+	System time (seconds): 0.05
 	Percent of CPU this job got: 99%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 51:41.69
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 7:38.12
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 43244
+	Maximum resident set size (kbytes): 119228
 	Average resident set size (kbytes): 0
 	Major (requiring I/O) page faults: 0
-	Minor (reclaiming a frame) page faults: 9879
+	Minor (reclaiming a frame) page faults: 36311
 	Voluntary context switches: 1
-	Involuntary context switches: 7957
+	Involuntary context switches: 552
 	Swaps: 0
 	File system inputs: 0
 	File system outputs: 0

@@ -117,8 +117,6 @@ com_y = com_x1[0][1][0]
 
 #print(com_x1)
 raiz = arv_int(com_x1)
-#print('\n')
-#print_a(raiz)
 
 for numerados in range(8):
     list2 = []
@@ -131,20 +129,25 @@ for numerados in range(3):
 initial = consulta(raiz,com_x1[0][0][0], com_x1[0][1][0], com_x1[0][0][1], com_x1[0][1][1])
 prim_gg[0].append(0)
 prim_gg[1].append(initial)
-prim_gg[2].append([-1,-1])
+prim_gg[2].append([])
 
-print(prim_gg)
 del com_x1
 
 adiciona_resultante(com_x,com_y,0,-1,-1,[-1,-1],0)
 PRIM(termos_x, termos_y, com_x, com_y,raiz, initial)
 
 arq = open(sys.argv[2], 'w')
+
 sorteada = []
 for test in range(len(prim_gg[2])):
-    sorteada = sorteada + prim_gg[2]
-    print(prim_gg[2])
-    #arq.writelines(str(prim_gg[0][test])+" "+str(prim_gg[1][test])+str(prim_gg[2][test])+"\n")
-sorted(set(sorteada))
+    arq.writelines(str(prim_gg[0][test])+" "+str(prim_gg[1][test])+"\n")
+    for xx in prim_gg[2][test]:
+        #print (xx)
+        if not xx in sorteada :
+            sorteada.append(xx)
+        #    sorteada = sorteada + int(str(xx[0])+str(xx[1]))
+    #print(prim_gg[2])
+
+#sorted(set(sorteada))
 arq.writelines(str(sorteada)+"\n")
 arq.close()

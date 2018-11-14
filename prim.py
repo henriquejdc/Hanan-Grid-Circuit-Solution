@@ -161,7 +161,7 @@ def add_primgg(avaible,t,t0):
 def PRIM(graph_cp_x, graph_cp_y, vert_x, vert_y, raiz, initial):
     menor_custo = 0
     pos_menor = 0
-    tabs = [[-1,-1]]
+    tabs = []
     adiciona_queue(graph_cp_x, graph_cp_y, vert_x, vert_y, raiz, tabs , 0)
 
     while (len(prim[0])!=0):
@@ -181,7 +181,7 @@ def PRIM(graph_cp_x, graph_cp_y, vert_x, vert_y, raiz, initial):
                     pos_primgg = prim_gg[1].index(avaible)
                     if(prim_gg[0][pos_primgg]>prim[7][pos_menor]):
                         prim_gg[0][pos_primgg] = prim[7][pos_menor]
-                        prim_gg[2][pos_primgg] = prim[6][pos_menor]
+                        prim_gg[2][pos_primgg] = prim[6][pos_menor].copy()
             vert_x = prim[0][pos_menor]
             vert_y = prim[1][pos_menor]
             tabs = prim[6][pos_menor]

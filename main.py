@@ -140,14 +140,14 @@ arq = open(sys.argv[2], 'w')
 
 sorteada = []
 for test in range(len(prim_gg[2])):
-    arq.writelines(str(prim_gg[0][test])+" "+str(prim_gg[1][test])+"\n")
+    arq.writelines(str(prim_gg[1][test])+" "+str(prim_gg[0][test])+"||")
     for xx in prim_gg[2][test]:
         #print (xx)
         if not xx in sorteada :
             sorteada.append(xx)
         #    sorteada = sorteada + int(str(xx[0])+str(xx[1]))
     #print(prim_gg[2])
-
+arq.writelines("\n")
 #sorted(set(sorteada))
 arq.writelines(str(sorteada)+"\n")
 arq.close()

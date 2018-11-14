@@ -1,10 +1,10 @@
-def new_node(nivel,x, y):
+def new_node(nivel,x, y,num):
     maximo = [x[1],y[1]]
     minimo = [x[0],y[0]]
-    lista = [nivel, x,  y, minimo, maximo, [], []]
+    lista = [nivel, x,  y, minimo, maximo, [], [],num]
     return lista
 
-def consult_arv(raiz, x, y):
+def consult_arv(raiz, x, y,num):
     if(x[1]>raiz[4][0]):
         raiz[4][0] = x[1]
     if(y[1]>raiz[4][1]):
@@ -18,25 +18,25 @@ def consult_arv(raiz, x, y):
     if(raiz[0] == 0):
         if(y[0]<=raiz[2][0]):
             if not raiz[5]:
-                raiz[5] = new_node(1,x,y)
+                raiz[5] = new_node(1,x,y,num)
             else:
-                consult_arv(raiz[5],x, y)
+                consult_arv(raiz[5],x, y,num)
         else:
             if not raiz[6]:
-                raiz[6] = new_node(1,x,y)
+                raiz[6] = new_node(1,x,y,num)
             else:
-                consult_arv(raiz[6],x, y)
+                consult_arv(raiz[6],x, y,num)
     else:
         if(x[0]<=raiz[1][0]):
             if not raiz[5]:
-                raiz[5] = new_node(0,x,y)
+                raiz[5] = new_node(0,x,y,num)
             else:
-                consult_arv(raiz[5],x, y)
+                consult_arv(raiz[5],x, y,num)
         else:
             if not raiz[6]:
-                raiz[6] = new_node(0,x,y)
+                raiz[6] = new_node(0,x,y,num)
             else:
-                consult_arv(raiz[6],x, y)
+                consult_arv(raiz[6],x, y,num)
 
 
 def arv_int(componentes):
@@ -44,9 +44,9 @@ def arv_int(componentes):
     x = 0
     while x < len(componentes):
         if x == 0:
-            raiz = new_node(0,comp[x][0],comp[x][1]) #tipo pai, x, y, maximos xy e esqerda direita
+            raiz = new_node(0,comp[x][0],comp[x][1],x) #tipo pai, x, y, maximos xy e esqerda direita
         else:
-            consult_arv(raiz,comp[x][0],comp[x][1])
+            consult_arv(raiz,comp[x][0],comp[x][1],x)
         x = x + 1
     return raiz
 
@@ -62,9 +62,9 @@ def consulta(raiz,px,py,px_a,py_a):
             x = x[6]
 
     if(x != []):
-            return 1;
+        return x[7]
     else:
-        return 0;
+        return -1
 
 def print_a(raiz):
     if(raiz!=[]):

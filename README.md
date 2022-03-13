@@ -17,8 +17,11 @@ dist_obj = distancia dos pontos de Steiner do objeto
 Tomar nota que:
 
 Pontos independem de camadas, todas serão feitos juntos, após será feito as arestas entre camadas.
+
 Será feito uma árvore entre todos os vértices com a distancia minima entre eles usando prim, o qual tem adaptações para navegar entre os pontos de Steiner e pontos dentro de um componente. 
+
 Quando se adiciona um ponto novo não conhecido na queue e este é componente ou está dentro das arestas de componentes ele tem custo 0.
+
 Logo, serão excluídos pontos que não fazem parte de caminhos entre componentes.
 
 Execução:

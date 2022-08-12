@@ -2,6 +2,8 @@
 
 Preview and implement Optimizer Hanan Grid construction.
 
+Monography: https://rd.uffs.edu.br/handle/prefix/2698
+
 # Documentation
 
 Layer = Matriz 3-dimensional das camadas
